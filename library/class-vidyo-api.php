@@ -112,7 +112,7 @@ class VidyoAPI extends SoapClient
 
 		$time_total = time() - $start;
 
-		echo 'Time for requesting Vidyo Service: ' . $time_total . ' s' . chr(13);
+		echo 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s' . chr(13);
 
 		return $response;
 	}
