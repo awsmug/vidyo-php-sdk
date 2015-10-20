@@ -70,11 +70,11 @@ class VidyoUserAPI extends VidyoAPI
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function __construct( $portal_host, $username, $password )
+	public function __construct( $portal_host, $username, $password, $debug = FALSE )
 	{
 		try
 		{
-			parent::__construct( $portal_host, 'v1_1/VidyoPortalUserService', $username, $password );
+			parent::__construct( $portal_host, 'v1_1/VidyoPortalUserService', $username, $password, $debug );
 
 			$login = $this->logIn();
 

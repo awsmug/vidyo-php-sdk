@@ -45,6 +45,13 @@ class VidyoAPI extends SoapClient
 	protected $errors = array();
 
 	/**
+	 * Debug
+	 *
+	 * @param boolean $debug
+	 */
+	protected $debug;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $portal_host
@@ -52,9 +59,10 @@ class VidyoAPI extends SoapClient
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function __construct( $portal_host, $endpoint, $username, $password )
+	public function __construct( $portal_host, $endpoint, $username, $password, $debug = FALSE )
 	{
 		$start = time();
+		$this->debug = $debug;
 
 		$this->endpoint = $endpoint;
 
@@ -82,7 +90,8 @@ class VidyoAPI extends SoapClient
 
 		$time_total = time() - $start;
 
-		echo 'Time for connecting Vidyo Service: ' . $time_total . ' s' . chr(13);
+		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s' . chr(13);
+		$this->log( $time_log );
 
 		return $client;
 	}
@@ -112,9 +121,24 @@ class VidyoAPI extends SoapClient
 
 		$time_total = time() - $start;
 
-		echo 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s' . chr(13);
+		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s' . chr(13);
+		$this->log( $time_log );
 
 		return $response;
+	}
+
+	/**
+	 * SDK Logging function
+	 * @param $message
+	 */
+	private function log( $message )
+	{
+		if( TRUE  == $this->debug )
+		{
+			$file = fopen( __CLASS__ . '.log', 'a' );
+			fputs( $file, $message );
+			fclose( $file );
+		}
 	}
 
 	/**

@@ -10,9 +10,9 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->super_client = new VidyoSuperAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd' );
-		$this->admin_client = new VidyoAdminAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd' );
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd' );
+		$this->super_client = new VidyoSuperAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+		$this->admin_client = new VidyoAdminAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
 	}
 
 	public function testTenants()

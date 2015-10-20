@@ -35,9 +35,9 @@ class VidyoAdminAPI extends VidyoAPI
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function __construct( $portal_host, $username, $password )
+	public function __construct( $portal_host, $username, $password, $debug = FALSE )
 	{
-		parent::__construct( $portal_host, 'VidyoPortalAdminService', $username, $password );
+		parent::__construct( $portal_host, 'VidyoPortalAdminService', $username, $password, $debug );
 	}
 
 	/**
