@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vidyo-api.php';
+require_once dirname( dirname( __FILE__ ) ) . '/vidyo-api.php';
 
 class VidyoAPITests extends PHPUnit_Framework_TestCase
 {
