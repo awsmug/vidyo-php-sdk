@@ -54,6 +54,8 @@ class VidyoAPI extends SoapClient
 	 */
 	public function __construct( $portal_host, $endpoint, $username, $password )
 	{
+		$start = time();
+
 		$this->endpoint = $endpoint;
 
 		$api_url = "http://{$portal_host}/services/{$this->endpoint}?wsdl";
@@ -78,6 +80,10 @@ class VidyoAPI extends SoapClient
 			return FALSE;
 		}
 
+		$time_total = time() - $start;
+
+		echo 'Time for connecting Vidyo Service: ' . $time_total . ' s' . chr(13);
+
 		return $client;
 	}
 
@@ -91,6 +97,8 @@ class VidyoAPI extends SoapClient
 	 */
 	public function request( $function, $params )
 	{
+		$start = time();
+
 		try
 		{
 			$response = $this->$function( $params );
@@ -101,6 +109,10 @@ class VidyoAPI extends SoapClient
 
 			return FALSE;
 		}
+
+		$time_total = time() - $start;
+
+		echo 'Time for requesting Vidyo Service: ' . $time_total . ' s' . chr(13);
 
 		return $response;
 	}
