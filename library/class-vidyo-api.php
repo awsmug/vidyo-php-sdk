@@ -61,7 +61,7 @@ class VidyoAPI extends SoapClient
 	 */
 	public function __construct( $portal_host, $endpoint, $username, $password, $debug = FALSE )
 	{
-		$start = time();
+		$start = microtime( TRUE );
 		$this->debug = $debug;
 
 		$this->endpoint = $endpoint;
@@ -88,7 +88,7 @@ class VidyoAPI extends SoapClient
 			return FALSE;
 		}
 
-		$time_total = time() - $start;
+		$time_total =  microtime( TRUE ) - $start;
 
 		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s' . chr(13);
 		$this->log( $time_log );
@@ -106,7 +106,7 @@ class VidyoAPI extends SoapClient
 	 */
 	public function request( $function, $params )
 	{
-		$start = time();
+		$start =  microtime( TRUE );
 
 		try
 		{
@@ -119,7 +119,7 @@ class VidyoAPI extends SoapClient
 			return FALSE;
 		}
 
-		$time_total = time() - $start;
+		$time_total =  microtime( TRUE ) - $start;
 
 		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s' . chr(13);
 		$this->log( $time_log );
