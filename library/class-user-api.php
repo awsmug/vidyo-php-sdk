@@ -297,8 +297,6 @@ class VidyoUserAPI extends VidyoAPI
 			'PIN'    => $pin
 		);
 
-		$this->log( 'Creating Moderator PIN ' . $pin . ' for Room ' . $room_id );
-
 		$response = $this->request( 'createModeratorPIN', $params );
 
 		if( is_object( $response ) && property_exists( $response, 'OK' ) && 'OK' == $response->OK )
