@@ -90,7 +90,7 @@ class VidyoAPI extends SoapClient
 
 		$time_total =  microtime( TRUE ) - $start;
 
-		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s' . chr(13);
+		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s';
 		$this->log( $time_log );
 
 		return $client;
@@ -121,7 +121,7 @@ class VidyoAPI extends SoapClient
 
 		$time_total =  microtime( TRUE ) - $start;
 
-		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s' . chr(13);
+		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s';
 		$this->log( $time_log );
 
 		return $response;
@@ -136,7 +136,7 @@ class VidyoAPI extends SoapClient
 		if( TRUE  == $this->debug )
 		{
 			$date = date( 'Y-m-d H:i:s', time() );
-			$message = $date . ' - ' . $message;
+			$message = $date . ' - ' . $message . chr( 13 );
 
 			$file = fopen( __CLASS__ . '.log', 'a' );
 			fputs( $file, $message );
