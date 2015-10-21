@@ -135,6 +135,9 @@ class VidyoAPI extends SoapClient
 	{
 		if( TRUE  == $this->debug )
 		{
+			$date = date( 'Y-m-d H:i:s', time() );
+			$message = $date . ' - ' . $message;
+
 			$file = fopen( __CLASS__ . '.log', 'a' );
 			fputs( $file, $message );
 			fclose( $file );
