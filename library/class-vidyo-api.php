@@ -149,6 +149,7 @@ class VidyoAPI extends SoapClient
 	 */
 	public function error( $message )
 	{
+		$this->log( 'API Error: ' .  $message );
 		$this->errors[] = $message;
 	}
 
