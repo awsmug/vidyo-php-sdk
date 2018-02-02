@@ -12,9 +12,9 @@ class VidyoAPITests extends TestCase {
 	var $user_client;
 
 	public function setUp() {
-		$this->vidyo_host = $_ENV[ 'VIDYO_HOST' ];
-		$this->vidyo_user = $_ENV[ 'VIDYO_USER' ];
-		$this->vidyo_pass = $_ENV[ 'VIDYO_PASS' ];
+		$this->vidyo_host = getenv( 'VIDYO_HOST' );
+		$this->vidyo_user = getenv( 'VIDYO_USER' );
+		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
 	}
 
 	public function testTenants() {
