@@ -1,31 +1,33 @@
 <?php
 
-require_once dirname( dirname( __FILE__ ) ) . '/vidyo-api.php';
+use PHPUnit\Framework\TestCase;
 
-class VidyoAPITests extends PHPUnit_Framework_TestCase
-{
+class VidyoAPITests extends TestCase {
+	var $vidyo_host;
+	var $vidyo_user;
+	var $vidyo_pass;
+
 	var $super_client;
 	var $admin_client;
 	var $user_client;
 
-	public function setUp()
-	{
+	public function setUp() {
+		$this->vidyo_host = $_ENV[ 'VIDYO_HOST' ];
+		$this->vidyo_user = $_ENV[ 'VIDYO_USER' ];
+		$this->vidyo_pass = $_ENV[ 'VIDYO_PASS' ];
 	}
 
-	public function testTenants()
-	{
-		$this->super_client = new VidyoSuperAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testTenants() {
+		$this->super_client = new VidyoSuperAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
-		if( !$this->super_client->list_tenants() )
-		{
+		if ( ! $this->super_client->list_tenants() ) {
 			print_r( $this->super_client->get_errors() );
 		}
 	}
 
-	public function testCreateDeleteRoom()
-	{
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
-		$room = $this->user_client->create_room( 'Vidyo Room 1', '2365555' );
+	public function testCreateDeleteRoom() {
+		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room              = $this->user_client->create_room( 'Vidyo Room 1', '2365555' );
 
 		$this->assertTrue( is_object( $room ) );
 		$this->assertTrue( property_exists( $room, 'entityID' ) );
@@ -34,10 +36,9 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $response );
 	}
 
-	public function testAddDeleteMember()
-	{
-		$this->admin_client = new VidyoAdminAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testAddDeleteMember() {
+		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$response = $this->admin_client->add_member( 'awsmugaccount', '123456789', 'Awesome UG', 'very@awesome.ug', 263777 );
 		$this->assertTrue( $response );
@@ -48,16 +49,15 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( property_exists( $members, 'total' ) );
 		$this->assertTrue( property_exists( $members, 'member' ) );
 
-		$member_id = $members->member[ 0 ]->memberID;
+		$member_id = $members->member[0]->memberID;
 
 		$response = $this->admin_client->delete_member( $member_id );
 		$this->assertTrue( $response );
 	}
 
-	public function testCreateRemoveRoomUrl()
-	{
-		$this->admin_client = new VidyoAdminAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testCreateRemoveRoomUrl() {
+		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$room = $this->user_client->create_room( 'Vidyo Room 3', '2365555' );
 		$this->assertTrue( is_object( $room ) );
@@ -78,10 +78,9 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $response );
 	}
 
-	public function testCreateRemoveRoomPIN()
-	{
-		$this->admin_client = new VidyoAdminAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testCreateRemoveRoomPIN() {
+		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$room = $this->user_client->create_room( 'Vidyo Room 4', '2365555' );
 		$this->assertTrue( is_object( $room ) );
@@ -100,9 +99,8 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $response );
 	}
 
-	public function testCreateRemoveModeratorPin()
-	{
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testCreateRemoveModeratorPin() {
+		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$room = $this->user_client->create_room( 'Vidyo Room 5', '2365555' );
 
@@ -121,9 +119,8 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $response );
 	}
 
-	public function testCreateRemoveRoomModeratorURL()
-	{
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testCreateRemoveRoomModeratorURL() {
+		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$room = $this->user_client->create_room( 'Vidyo Room 6', '2365555' );
 		$this->assertTrue( is_object( $room ) );
@@ -142,9 +139,8 @@ class VidyoAPITests extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $response );
 	}
 
-	public function testGetInviteContent()
-	{
-		$this->user_client = new VidyoUserAPI( 'hin.vidyo.com', 'sven_admin', 'lEm3Af9eDd', TRUE );
+	public function testGetInviteContent() {
+		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
 		$room = $this->user_client->create_room( 'Vidyo Room 2', '2365555' );
 		$this->assertTrue( is_object( $room ) );
