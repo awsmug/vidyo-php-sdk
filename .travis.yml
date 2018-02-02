@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+
+script:
+- vendor/bin/phpunit --version
+- vendor/bin/phpunit
+
+install:
+  - travis_retry composer install --no-interaction --ignore-platform-reqs

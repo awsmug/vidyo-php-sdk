@@ -1,7 +1,7 @@
 {
   "name": "vidyo-php-sdk",
   "version": "0.1.0",
-  "description": "Vidyo PHP SDK for programming ",
+  "description": "Vidyo PHP SDK for programming with Vidyo video API.",
   "keywords": [
     "vidyo"
   ],
@@ -25,5 +25,5 @@
   "bugs": {
     "url": "https://github.com/awsmug/vidyo-php-sdk/issues"
   },
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-3.0"
 }

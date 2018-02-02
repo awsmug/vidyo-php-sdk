@@ -1,0 +1,29 @@
+{
+  "name": "awsmug/vidyo-php-sdk",
+  "description": "Vidyo PHP SDK for programming with Vidyo video API.",
+  "version": "0.1.0",
+  "license": "GPL-3.0",
+  "type": "sdk",
+  "keywords": [
+    "vidyo"
+  ],
+  "homepage": "https://github.com/awsmug/vidyo-php-sdk",
+  "authors": [
+    {
+      "name": "Sven Wagener",
+      "email": "contact@awesome.ug",
+      "homepage": "http://www.awesome.ug",
+      "role": "Product Lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/awsmug/vidyo-php-sdk/issues"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5",
+    "codeclimate/php-test-reporter": "^0.4.4"
+  }
+}
