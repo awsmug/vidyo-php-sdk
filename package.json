@@ -1,0 +1,29 @@
+{
+  "name": "vidyo-php-sdk",
+  "version": "0.1.0",
+  "description": "Vidyo PHP SDK for programming ",
+  "keywords": [
+    "vidyo"
+  ],
+  "author": {
+    "name": "Awesome UG",
+    "email": "contact@awesome.ug",
+    "url": "http://www.awesome.ug"
+  },
+  "contributors": [
+    {
+      "name": "Sven Wagener",
+      "email": "contact@awesome.ug",
+      "url": "http://www.awesome.ug"
+    }
+  ],
+  "homepage": "https://github.com/awsmug/vidyo-php-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/awsmug/vidyo-php-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/awsmug/vidyo-php-sdk/issues"
+  },
+  "license": "GPL-2.0-or-later"
+}
