@@ -56,3 +56,4 @@ pom.xml.releaseBackup
 pom.xml.tag
 pom.xml.tag
 vendor
+tests/codeCoverage
