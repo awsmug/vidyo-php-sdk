@@ -17,6 +17,8 @@ class VidyoAPITests extends TestCase {
 		$this->vidyo_user = getenv( 'VIDYO_USER' );
 		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
 		$this->vidyo_extension = getenv( 'VIDYO_EXTENSION' );
+
+		$this->vidyo_extension.= substr( time() * rand(), 0, 6 );
 	}
 /*
 	public function testTenants() {
