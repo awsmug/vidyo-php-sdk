@@ -8,8 +8,8 @@ php:
   - 7.2
 
 script:
-- vendor/bin/phpunit --version
-- vendor/bin/phpunit
+- phpunit --version
+- phpunit
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
