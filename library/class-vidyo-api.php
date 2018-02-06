@@ -38,6 +38,13 @@ class VidyoAPI extends SoapClient
 	protected $endpoint;
 
 	/**
+	 * Version endpoint
+	 *
+	 * @param boolean $debug
+	 */
+	protected $version_endpoint = 'v1_1';
+
+	/**
 	 * Errors
 	 *
 	 * @var array
@@ -66,7 +73,7 @@ class VidyoAPI extends SoapClient
 
 		$this->endpoint = $endpoint;
 
-		$api_url = "http://{$portal_host}/services/{$this->endpoint}?wsdl";
+		$api_url = "https://{$portal_host}/services/{$this->endpoint}?wsdl";
 
 		$options = array(
 			'login'    => $username,
