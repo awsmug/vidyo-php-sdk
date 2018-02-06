@@ -81,7 +81,7 @@ class VidyoUserAPI extends VidyoAPI
 			$this->pak = $login->pak;
 			$this->pak2 = $login->pak2;
 			$this->vm = $login->vmaddress;
-			$this->proxy = $login->proxyaddress;
+			// $this->proxy = $login->proxyaddress;
 
 			$params = array(
 				'EID' => $username
@@ -103,7 +103,7 @@ class VidyoUserAPI extends VidyoAPI
 			return FALSE;
 		}
 
-		return $client;
+		return TRUE;
 	}
 
 	/**
@@ -116,7 +116,7 @@ class VidyoUserAPI extends VidyoAPI
 	 */
 	public function create_room( $name, $extension )
 	{
-		if( NULL == $extension )
+		if( NULL === $extension )
 		{
 			$extension = substr( time() * rand(), 0, 6 );
 		}

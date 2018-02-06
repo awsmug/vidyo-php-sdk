@@ -90,7 +90,7 @@ class VidyoAPI extends SoapClient
 		}
 		catch ( Exception $e )
 		{
-			$this->error( $e->faultstring );
+			$this->error( $e->getMessage() );
 
 			return FALSE;
 		}
@@ -121,7 +121,7 @@ class VidyoAPI extends SoapClient
 		}
 		catch ( Exception $e )
 		{
-			$this->error( $e->faultstring );
+			$this->error( $e->getMessage() );
 
 			return FALSE;
 		}
