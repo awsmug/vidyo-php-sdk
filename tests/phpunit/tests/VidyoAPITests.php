@@ -106,7 +106,7 @@ class VidyoAPITests extends TestCase {
 	public function testCreateRemoveModeratorPin() {
 		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
-		$room = $this->user_client->create_room( 'Vidyo Room 5 ', $this->vidyo_extension . $this->vidyo_extension );
+		$room = $this->user_client->create_room( 'Vidyo Room 5 ', $this->vidyo_extension, $this->vidyo_extension );
 
 		$this->assertTrue( is_object( $room ) );
 		$this->assertTrue( property_exists( $room, 'entityID' ) );
@@ -126,7 +126,7 @@ class VidyoAPITests extends TestCase {
 	public function testCreateRemoveRoomModeratorURL() {
 		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
-		$room = $this->user_client->create_room( 'Vidyo Room 6 ', $this->vidyo_extension . $this->vidyo_extension );
+		$room = $this->user_client->create_room( 'Vidyo Room 6 ', $this->vidyo_extension, $this->vidyo_extension );
 		$this->assertTrue( is_object( $room ) );
 		$this->assertTrue( property_exists( $room, 'entityID' ) );
 
