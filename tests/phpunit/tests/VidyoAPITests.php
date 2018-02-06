@@ -17,7 +17,6 @@ class VidyoAPITests extends TestCase {
 		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
 	}
 
-	/*
 	public function testTenants() {
 		$this->super_client = new VidyoSuperAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
@@ -37,7 +36,6 @@ class VidyoAPITests extends TestCase {
 		$this->assertTrue( $response );
 	}
 
-	*/
 	public function testAddDeleteMember() {
 		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
@@ -57,7 +55,6 @@ class VidyoAPITests extends TestCase {
 		$this->assertTrue( $response );
 	}
 
-	/*
 	public function testCreateRemoveRoomUrl() {
 		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
@@ -155,5 +152,4 @@ class VidyoAPITests extends TestCase {
 		$response = $this->user_client->delete_room( $room->entityID );
 		$this->assertTrue( $response );
 	}
-	*/
 }
