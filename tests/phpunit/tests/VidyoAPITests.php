@@ -16,7 +16,7 @@ class VidyoAPITests extends TestCase {
 		$this->vidyo_user = getenv( 'VIDYO_USER' );
 		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
 	}
-
+/*
 	public function testTenants() {
 		$this->super_client = new VidyoSuperAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
@@ -24,6 +24,7 @@ class VidyoAPITests extends TestCase {
 			print_r( $this->super_client->get_errors() );
 		}
 	}
+*/
 
 	public function testCreateDeleteRoom() {
 		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
