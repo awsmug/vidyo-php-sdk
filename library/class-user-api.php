@@ -98,7 +98,7 @@ class VidyoUserAPI extends VidyoAPI
 		}
 		catch ( Exception $e )
 		{
-			$this->error( $e->faultstring );
+			$this->error( $e->getMessage() );
 
 			return FALSE;
 		}
