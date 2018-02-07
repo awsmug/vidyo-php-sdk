@@ -81,7 +81,6 @@ class VidyoUserAPI extends VidyoAPI
 			$this->pak = $login->pak;
 			$this->pak2 = $login->pak2;
 			$this->vm = $login->vmaddress;
-			// $this->proxy = $login->proxyaddress;
 
 			$params = array(
 				'EID' => $username
@@ -110,15 +109,15 @@ class VidyoUserAPI extends VidyoAPI
 	 * Create Room
 	 *
 	 * @param string $name
-	 * @param int    $extenstion
+	 * @param int    $extension
 	 *
 	 * @return mixed $response
 	 */
 	public function create_room( $name, $extension )
 	{
-		if( NULL === $extension )
-		{
-			$extension = substr( time() * rand(), 0, 6 );
+		if( false !== $this->get_room_by_extension( $extension ) ) {
+			$this->error( 'Room already exists' );
+			return false;
 		}
 
 		$params = array(
@@ -132,12 +131,8 @@ class VidyoUserAPI extends VidyoAPI
 		{
 			return $response->Entity;
 		}
-		else
-		{
-			$this->error( 'Could not create Room' );
 
-			return FALSE;
-		}
+		$this->error( 'Could not create Room' );
 
 		return FALSE;
 	}
@@ -249,8 +244,6 @@ class VidyoUserAPI extends VidyoAPI
 
 			return FALSE;
 		}
-
-		return $response;
 	}
 
 	/**
@@ -278,8 +271,6 @@ class VidyoUserAPI extends VidyoAPI
 
 			return FALSE;
 		}
-
-		return $response;
 	}
 
 	/**
@@ -447,4 +438,74 @@ class VidyoUserAPI extends VidyoAPI
 
 		return $response;
 	}
+
+	/**
+	 * General search for an entity
+	 *
+	 * @param string $filter
+	 *
+	 * @return stdClass|bool $response
+	 */
+	public function find( $filter ) {
+		$params = array(
+			'Filter' => array(
+				'query' => $filter
+			)
+		);
+
+		$response = $this->request( 'search', $params );
+
+		if( is_object( $response ) && $response->total > 0 )
+		{
+			return $response;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Getting Room by extension
+	 *
+	 * @param int $extension
+	 *
+	 * @return stdClass|bool
+	 */
+	public function get_room_by_extension( $extension ) {
+		$entity = $this->get_entity_by( 'extension', $extension );
+
+		if( ! $entity ) {
+			return false;
+		}
+
+		if( 'room' === $entity->EntityType ) {
+			return $entity;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Getting entity by
+	 *
+	 * @param string $property
+	 * @param string $search
+	 *
+	 * @return stdClass|bool
+	 */
+	public function get_entity_by( $property, $search ) {
+		$entities = $this->find( $search );
+
+		if( ! $entities ) {
+			return false;
+		}
+
+		foreach ( $entities->Entity AS $entity ) {
+			if( $entity->$property === $search ) {
+				return $entity;
+			}
+		}
+
+		return false;
+	}
+
 }

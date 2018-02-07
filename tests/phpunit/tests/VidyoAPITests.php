@@ -8,8 +8,19 @@ class VidyoAPITests extends TestCase {
 	var $vidyo_pass;
 	var $vidyo_extension;
 
+	/**
+	 * @var VidyoSuperAPI
+	 */
 	var $super_client;
+
+	/**
+	 * @var VidyoAdminAPI
+	 */
 	var $admin_client;
+
+	/**
+	 * @var VidyoUserAPI
+	 */
 	var $user_client;
 
 	public function setUp() {
@@ -19,8 +30,12 @@ class VidyoAPITests extends TestCase {
 		$this->vidyo_extension = getenv( 'VIDYO_EXTENSION' );
 
 		$this->vidyo_extension.= substr( time() * rand(), 0, 6 );
+
+		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 	}
-/*
+
+	/*
 	public function testTenants() {
 		$this->super_client = new VidyoSuperAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 
@@ -28,22 +43,21 @@ class VidyoAPITests extends TestCase {
 			print_r( $this->super_client->get_errors() );
 		}
 	}
-*/
+	*/
 	public function testCreateDeleteRoom() {
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$room              = $this->user_client->create_room( 'Vidyo Room 1 '  . $this->vidyo_extension, $this->vidyo_extension );
+		$room1 = $this->user_client->create_room( 'Vidyo Room 1', $this->vidyo_extension );
 
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
+		$this->assertTrue( is_object( $room1 ) );
+		$this->assertTrue( property_exists( $room1, 'entityID' ) );
 
-		$response = $this->user_client->delete_room( $room->entityID );
+		$room2 = $this->user_client->create_room( 'Vidyo Room 1', $this->vidyo_extension );
+		$this->assertFalse( $room2 );
+
+		$response = $this->user_client->delete_room( $room1->entityID );
 		$this->assertTrue( $response );
 	}
 
 	public function testAddDeleteMember() {
-		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-
 		$response = $this->admin_client->add_member( 'awsmugaccount'  . $this->vidyo_extension, '123456789', 'Awesome UG', 'very@awesome.ug', $this->vidyo_extension );
 		$this->assertTrue( $response );
 

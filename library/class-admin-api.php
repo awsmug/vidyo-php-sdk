@@ -157,4 +157,19 @@ class VidyoAdminAPI extends VidyoAPI
 
 		return FALSE;
 	}
+
+	public function get_rooms( $filter ) {
+		$params = array(
+			'filter' => $filter
+		);
+
+		$response = $this->request( 'GetRooms', $params );
+
+		if( is_object( $response ) && property_exists( $response, 'EntityType' ) && 'Room' === $response->EntityType )
+		{
+			return $response;
+		}
+
+		return $response;
+	}
 }
