@@ -115,11 +115,6 @@ class VidyoUserAPI extends VidyoAPI
 	 */
 	public function create_room( $name, $extension )
 	{
-		if( false !== $this->get_room_by_extension( $extension ) ) {
-			$this->error( 'Room already exists' );
-			return false;
-		}
-
 		$params = array(
 			'name'      => $name,
 			'extension' => $extension
@@ -132,7 +127,7 @@ class VidyoUserAPI extends VidyoAPI
 			return $response->Entity;
 		}
 
-		$this->error( 'Could not create Room' );
+		$this->error( 'Could not create room' );
 
 		return false;
 	}
@@ -440,7 +435,7 @@ class VidyoUserAPI extends VidyoAPI
 	/**
 	 * General search for an entity
 	 *
-	 * @param string $filter
+	 * @param string $filter Name, Display name or extension to search for
 	 *
 	 * @return stdClass|bool $response
 	 */
@@ -452,9 +447,6 @@ class VidyoUserAPI extends VidyoAPI
 		);
 
 		$response = $this->request( 'search', $params );
-
-		$this->log( print_r( $response, true ) );
-		$this->log( print_r( $params, true ) );
 
 		if( is_object( $response ) && $response->total > 0 )
 		{
@@ -473,6 +465,27 @@ class VidyoUserAPI extends VidyoAPI
 	 */
 	public function get_room_by_extension( $extension ) {
 		$entity = $this->get_entity_by( 'extension', $extension );
+
+		if( ! $entity ) {
+			return false;
+		}
+
+		if( 'room' === $entity->EntityType ) {
+			return $entity;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Getting room by display name
+	 *
+	 * @param string $name
+	 *
+	 * @return stdClass|bool
+	 */
+	public function get_room_by_display_name( $name ) {
+		$entity = $this->get_entity_by( 'displayName', $name );
 
 		if( ! $entity ) {
 			return false;

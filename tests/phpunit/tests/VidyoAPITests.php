@@ -5,8 +5,17 @@ use PHPUnit\Framework\TestCase;
 class VidyoAPITests extends VidyoTestCase {
 
 	public function testCreateDeleteRoom() {
-		$room = $this->user_client->create_room( 'Vidyo Room', $this->vidyo_extension );
+		$room_name = 'My room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
+
+		$room = $this->user_client->create_room( $room_name, $extension );
 		$this->assertTrue( is_object( $room ) );
+
+		$same_room = $this->user_client->create_room( $room_name, $extension . '0' );
+		$this->assertFalse( $same_room );
+
+		$same_room = $this->user_client->create_room( $room_name . 'x', $extension );
+		$this->assertFalse( $same_room );
 
 		$response = $this->user_client->delete_room( $room->entityID );
 		$this->assertTrue( $response );
