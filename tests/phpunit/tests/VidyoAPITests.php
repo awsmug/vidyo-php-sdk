@@ -2,59 +2,32 @@
 
 use PHPUnit\Framework\TestCase;
 
-class VidyoAPITests extends TestCase {
-	var $vidyo_host;
-	var $vidyo_user;
-	var $vidyo_pass;
-	var $vidyo_extension;
+class VidyoAPITests extends VidyoTestCase {
 
-	/**
-	 * @var VidyoSuperAPI
-	 */
-	var $super_client;
-
-	/**
-	 * @var VidyoAdminAPI
-	 */
-	var $admin_client;
-
-	/**
-	 * @var VidyoUserAPI
-	 */
-	var $user_client;
-
-	public function setUp() {
-		$this->vidyo_host = getenv( 'VIDYO_HOST' );
-		$this->vidyo_user = getenv( 'VIDYO_USER' );
-		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
-		$this->vidyo_extension = getenv( 'VIDYO_EXTENSION' );
-
-		$this->vidyo_extension.= substr( time() * rand(), 0, 6 );
-
-		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-	}
-
-	/*
-	public function testTenants() {
-		$this->super_client = new VidyoSuperAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-
-		if ( ! $this->super_client->list_tenants() ) {
-			print_r( $this->super_client->get_errors() );
-		}
-	}
-	*/
 	public function testCreateDeleteRoom() {
-		$room1 = $this->user_client->create_room( 'Vidyo Room 1', $this->vidyo_extension );
+		$room = $this->user_client->create_room( 'Vidyo Room', $this->vidyo_extension );
+		$this->assertTrue( is_object( $room ) );
 
-		$this->assertTrue( is_object( $room1 ) );
-		$this->assertTrue( property_exists( $room1, 'entityID' ) );
-
-		$room2 = $this->user_client->create_room( 'Vidyo Room 1', $this->vidyo_extension );
-		$this->assertFalse( $room2 );
-
-		$response = $this->user_client->delete_room( $room1->entityID );
+		$response = $this->user_client->delete_room( $room->entityID );
 		$this->assertTrue( $response );
+	}
+
+	public function testFind() {
+		$room_name = 'My room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
+		$room = $this->user_client->create_room( $room_name, $extension );
+
+		// Find by room name
+		$response = $this->user_client->find( $room_name );
+		$this->assertTrue( is_object( $response ) );
+		$this->assertEquals(1, $response->total );
+
+		// Find by extension name
+		$response = $this->user_client->find( $extension );
+		$this->assertTrue( is_object( $response ) );
+		$this->assertEquals(1, $response->total );
+
+		$this->user_client->delete_room( $room->entityID );
 	}
 
 	public function testAddDeleteMember() {

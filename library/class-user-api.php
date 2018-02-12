@@ -111,7 +111,7 @@ class VidyoUserAPI extends VidyoAPI
 	 * @param string $name
 	 * @param int    $extension
 	 *
-	 * @return mixed $response
+	 * @return bool|stdClass $response
 	 */
 	public function create_room( $name, $extension )
 	{
@@ -134,7 +134,7 @@ class VidyoUserAPI extends VidyoAPI
 
 		$this->error( 'Could not create Room' );
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -142,7 +142,7 @@ class VidyoUserAPI extends VidyoAPI
 	 *
 	 * @param int $room_id
 	 *
-	 * @return mixed $response
+	 * @return bool $response
 	 */
 	public function delete_room( $room_id )
 	{
@@ -154,14 +154,12 @@ class VidyoUserAPI extends VidyoAPI
 
 		if( is_object( $response ) && property_exists( $response, 'OK' ) && 'OK' == $response->OK )
 		{
-			return TRUE;
+			return true;
 		}
-		else
-		{
-			$this->error( 'Could not delete Room' );
 
-			return FALSE;
-		}
+		$this->error( 'Could not delete Room' );
+
+		return false;
 	}
 
 	/**
@@ -454,6 +452,9 @@ class VidyoUserAPI extends VidyoAPI
 		);
 
 		$response = $this->request( 'search', $params );
+
+		$this->log( print_r( $response, true ) );
+		$this->log( print_r( $params, true ) );
 
 		if( is_object( $response ) && $response->total > 0 )
 		{

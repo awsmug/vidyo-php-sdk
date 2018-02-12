@@ -59,12 +59,10 @@ class VidyoAdminAPI extends VidyoAPI
 		{
 			return $response;
 		}
-		else
-		{
-			$this->error( 'Could not get Members' );
 
-			return FALSE;
-		}
+		$this->error( 'Could not get Members' );
+
+		return FALSE;
 	}
 
 	/**
@@ -158,9 +156,12 @@ class VidyoAdminAPI extends VidyoAPI
 		return FALSE;
 	}
 
+
 	public function get_rooms( $filter ) {
 		$params = array(
-			'filter' => $filter
+			'Filter' => array(
+				'query' => $filter
+			)
 		);
 
 		$response = $this->request( 'GetRooms', $params );
