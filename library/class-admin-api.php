@@ -62,7 +62,7 @@ class VidyoAdminAPI extends VidyoAPI
 
 		$this->error( 'Could not get Members' );
 
-		return FALSE;
+		return false;
 	}
 
 	/**

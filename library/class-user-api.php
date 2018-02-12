@@ -229,14 +229,24 @@ class VidyoUserAPI extends VidyoAPI
 
 		if( is_object( $response ) && property_exists( $response, 'OK' ) && 'OK' == $response->OK )
 		{
-			return TRUE;
+			return true;
 		}
 		else
 		{
 			$this->error( 'Could not create Room URL' );
 
-			return FALSE;
+			return false;
 		}
+	}
+
+	public function get_room_url( $entity_id ) {
+		$response = $this->get_room_by_entity_id( $entity_id );
+
+		if( property_exists( $response, 'RoomMode' ) && is_object( $response->RoomMode ) && property_exists( $response->RoomMode, 'roomURL' ) ) {
+			return $response->RoomMode->roomURL;
+		}
+
+		return false;
 	}
 
 	/**
@@ -285,16 +295,13 @@ class VidyoUserAPI extends VidyoAPI
 
 		if( is_object( $response ) && property_exists( $response, 'OK' ) && 'OK' == $response->OK )
 		{
-			return TRUE;
+			return true;
 		}
 		else
 		{
 			$this->error( 'Could not create Moderator PIN' );
-
-			return FALSE;
+			return false;
 		}
-
-		return $response;
 	}
 
 	/**
@@ -466,11 +473,7 @@ class VidyoUserAPI extends VidyoAPI
 	public function get_room_by_extension( $extension ) {
 		$entity = $this->get_entity_by( 'extension', $extension );
 
-		if( ! $entity ) {
-			return false;
-		}
-
-		if( 'room' === $entity->EntityType ) {
+		if( $this->is_room( $entity ) ) {
 			return $entity;
 		}
 
@@ -487,15 +490,65 @@ class VidyoUserAPI extends VidyoAPI
 	public function get_room_by_display_name( $name ) {
 		$entity = $this->get_entity_by( 'displayName', $name );
 
-		if( ! $entity ) {
-			return false;
-		}
-
-		if( 'room' === $entity->EntityType ) {
+		if( $this->is_room( $entity ) ) {
 			return $entity;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Gets room by entity id
+	 *
+	 * @param $entity_id
+	 *
+	 * @return bool|stdClass
+	 */
+	public function get_room_by_entity_id( $entity_id ) {
+		$entity = $this->get_entity_by_entity_id( $entity_id );
+
+		if( $this->is_room( $entity ) ) {
+			return $entity;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if entity is room
+	 *
+	 * @param stdClass $entity
+	 *
+	 * @return bool $is_room
+	 */
+	public function is_room( $entity ) {
+		if( ! is_object( $entity ) ) {
+			return false;
+		}
+
+		if( ! property_exists( $entity, 'EntityType' ) ) {
+			return false;
+		}
+
+		if( 'Room' === $entity->EntityType ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function get_entity_by_entity_id( $entity_id ) {
+		$params = array(
+			'entityID' => $entity_id
+		);
+
+		$response = $this->request( 'GetEntityByEntityID', $params );
+
+		if( is_object( $response ) && $response->total > 0 ) {
+			return $response->Entity[0];
+		}
+
+		return $response;
 	}
 
 	/**

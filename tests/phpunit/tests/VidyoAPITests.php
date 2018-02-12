@@ -3,9 +3,8 @@
 use PHPUnit\Framework\TestCase;
 
 class VidyoAPITests extends VidyoTestCase {
-
 	public function testCreateDeleteRoom() {
-		$room_name = 'My room ' . $this->get_random_id();
+		$room_name = 'Room ' . $this->get_random_id();
 		$extension = $this->get_random_extension();
 
 		$room = $this->user_client->create_room( $room_name, $extension );
@@ -21,8 +20,35 @@ class VidyoAPITests extends VidyoTestCase {
 		$this->assertTrue( $response );
 	}
 
+	public function testGetRoomBy() {
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
+
+		$room = $this->user_client->create_room( $room_name, $extension );
+
+		$response = $this->user_client->get_room_by_extension( $extension );
+		$this->assertTrue( is_object( $response ) );
+
+		$response = $this->user_client->get_room_by_extension( $extension . '0' );
+		$this->assertFalse( $response );
+
+		$response = $this->user_client->get_room_by_display_name( $room_name );
+		$this->assertTrue( is_object( $response ) );
+
+		$response = $this->user_client->get_room_by_display_name( $room_name . 'x' );
+		$this->assertFalse( $response );
+
+		$response = $this->user_client->get_room_by_entity_id( $room->entityID );
+		$this->assertTrue( is_object( $response ) );
+
+		$response = $this->user_client->get_room_by_entity_id( $room->entityID . 'x' );
+		$this->assertFalse( $response );
+
+		$this->user_client->delete_room( $room->entityID );
+	}
+
 	public function testFind() {
-		$room_name = 'My room ' . $this->get_random_id();
+		$room_name = 'Room ' . $this->get_random_id();
 		$extension = $this->get_random_extension();
 		$room = $this->user_client->create_room( $room_name, $extension );
 
@@ -40,10 +66,14 @@ class VidyoAPITests extends VidyoTestCase {
 	}
 
 	public function testAddDeleteMember() {
-		$response = $this->admin_client->add_member( 'awsmugaccount'  . $this->vidyo_extension, '123456789', 'Awesome UG', 'very@awesome.ug', $this->vidyo_extension );
+		$member_name = 'SvenWagener';
+		$extension = $this->get_random_extension();
+		
+		$response = $this->admin_client->add_member( $member_name, '123456789', 'Sven Wagener', 'very@awesome.ug', $extension );
 		$this->assertTrue( $response );
 
-		$members = $this->admin_client->get_members( $this->vidyo_extension );
+		$members = $this->admin_client->get_members( $extension );
+		$this->admin_client->log( print_r( $members, true ) );
 
 		$this->assertTrue( is_object( $members ) );
 		$this->assertTrue( property_exists( $members, 'total' ) );
@@ -56,36 +86,27 @@ class VidyoAPITests extends VidyoTestCase {
 	}
 
 	public function testCreateRemoveRoomUrl() {
-		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
 
-		$room = $this->user_client->create_room( 'Vidyo Room 3 '  . $this->vidyo_extension, $this->vidyo_extension );
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
-
-		$old_room_url = $this->admin_client->get_room( $room->entityID )->RoomMode->roomURL;
-
-		$this->assertEquals( $old_room_url, $room->RoomMode->roomURL );
+		$room = $this->user_client->create_room( $room_name, $extension );
+		$first_room_url = $this->user_client->get_room_url( $room->entityID );
 
 		$this->assertTrue( $this->user_client->create_room_url( $room->entityID ) );
-		$this->assertNotEquals( $old_room_url, $this->admin_client->get_room( $room->entityID )->RoomMode->roomURL );
+		$this->assertNotEquals( $first_room_url, $this->user_client->get_room_url( $room->entityID ) );
 
-		$this->assertTrue( property_exists( $this->admin_client->get_room( $room->entityID )->RoomMode, 'roomURL' ) );
 		$this->assertTrue( $this->user_client->remove_room_url( $room->entityID ) );
-		$this->assertFalse( property_exists( $this->admin_client->get_room( $room->entityID )->RoomMode, 'roomURL' ) );
 
-		$response = $this->user_client->delete_room( $room->entityID );
-		$this->assertTrue( $response );
+		$this->user_client->log( print_r( $room, true ) );
+
+		$this->user_client->delete_room( $room->entityID );
 	}
 
 	public function testCreateRemoveRoomPIN() {
-		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client  = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
 
-		$room = $this->user_client->create_room( 'Vidyo Room 4 '  . $this->vidyo_extension, $this->vidyo_extension );
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
-
+		$room = $this->user_client->create_room( $room_name, $extension );
 		$pin = substr( time(), 0, 10 );
 
 		$this->assertTrue( $this->user_client->create_room_pin( $room->entityID, $pin ) );
@@ -95,18 +116,14 @@ class VidyoAPITests extends VidyoTestCase {
 		$this->assertTrue( $this->user_client->remove_room_pin( $room->entityID ) );
 		$this->assertFalse( $this->admin_client->get_room( $room->entityID )->RoomMode->hasPin );
 
-		$response = $this->user_client->delete_room( $room->entityID );
-		$this->assertTrue( $response );
+		$this->user_client->delete_room( $room->entityID );
 	}
 
 	public function testCreateRemoveModeratorPin() {
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
 
-		$room = $this->user_client->create_room( 'Vidyo Room 5 ', $this->vidyo_extension, $this->vidyo_extension );
-
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
-
+		$room = $this->user_client->create_room( $room_name, $extension );
 		$pin = substr( time(), 0, 10 );
 
 		$response = $this->user_client->create_moderator_pin( $room->entityID, $pin );
@@ -115,16 +132,14 @@ class VidyoAPITests extends VidyoTestCase {
 		$response = $this->user_client->remove_moderator_pin( $room->entityID );
 		$this->assertTrue( $response );
 
-		$response = $this->user_client->delete_room( $room->entityID );
-		$this->assertTrue( $response );
+		$this->user_client->delete_room( $room->entityID );
 	}
 
 	public function testCreateRemoveRoomModeratorURL() {
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
 
-		$room = $this->user_client->create_room( 'Vidyo Room 6 ', $this->vidyo_extension, $this->vidyo_extension );
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
+		$room = $this->user_client->create_room( $room_name, $extension );
 
 		$response = $this->user_client->create_moderator_url( $room->entityID );
 		$this->assertTrue( $response );
@@ -135,21 +150,18 @@ class VidyoAPITests extends VidyoTestCase {
 		$response = $this->user_client->remove_moderator_url( $room->entityID );
 		$this->assertTrue( $response );
 
-		$response = $this->user_client->delete_room( $room->entityID );
-		$this->assertTrue( $response );
+		$this->user_client->delete_room( $room->entityID );
 	}
 
 	public function testGetInviteContent() {
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$room_name = 'Room ' . $this->get_random_id();
+		$extension = $this->get_random_extension();
 
-		$room = $this->user_client->create_room( 'Vidyo Room 2 ' . $this->vidyo_extension, $this->vidyo_extension );
-		$this->assertTrue( is_object( $room ) );
-		$this->assertTrue( property_exists( $room, 'entityID' ) );
+		$room = $this->user_client->create_room( $room_name, $extension );
 
 		$content = $this->user_client->get_invite_content( $room->entityID );
 		$this->assertStringStartsWith( 'Join', $content );
 
-		$response = $this->user_client->delete_room( $room->entityID );
-		$this->assertTrue( $response );
+		$this->user_client->delete_room( $room->entityID );
 	}
 }

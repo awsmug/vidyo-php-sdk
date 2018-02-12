@@ -138,7 +138,7 @@ class VidyoAPI extends SoapClient
 	 * SDK Logging function
 	 * @param $message
 	 */
-	protected function log( $message )
+	public function log( $message )
 	{
 		if( TRUE  == $this->debug )
 		{
