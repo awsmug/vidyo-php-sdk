@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+use Vidyo_PHP_SDK\Vidyo_Admin_API;
+use Vidyo_PHP_SDK\Vidyo_User_API;
+
 class VidyoTestCase extends TestCase {
 
 	/**
@@ -53,8 +56,8 @@ class VidyoTestCase extends TestCase {
 		$this->vidyo_extension = getenv( 'VIDYO_EXTENSION' );
 		$this->vidyo_extension.= $this->get_random_id();
 
-		$this->admin_client = new VidyoAdminAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client = new VidyoUserAPI( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->admin_client = new Vidyo_Admin_API( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$this->user_client = new Vidyo_User_API( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
 	}
 
 	/**

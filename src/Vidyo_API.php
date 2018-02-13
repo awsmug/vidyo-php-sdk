@@ -1,4 +1,7 @@
 <?php
+
+namespace Vidyo_PHP_SDK;
+
 /**
  * Vidyo API
  *
@@ -28,7 +31,7 @@
 
 ini_set( 'soap.wsdl_cache_enabled', '0' );
 
-class VidyoAPI extends SoapClient
+class Vidyo_API extends \SoapClient
 {
 	/**
 	 * Endpoint name

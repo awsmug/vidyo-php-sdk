@@ -1,5 +1,7 @@
 <?php
 
+namespace Vidyo_PHP_SDK;
+
 /**
  * Vidyo API for VidyoPortalAdminService
  *
@@ -26,7 +28,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-class VidyoAdminAPI extends VidyoAPI
+class Vidyo_Admin_API extends Vidyo_API
 {
 	/**
 	 * Constructor
@@ -80,7 +82,7 @@ class VidyoAdminAPI extends VidyoAPI
 	 */
 	public function add_member( $name, $password, $display_name, $email, $extension, $language  = 'en', $role_name = 'Normal', $group_name = 'Default'  )
 	{
-		$member = new stdClass();
+		$member = new \stdClass();
 		$member->name = $name;
 		$member->password = $password;
 		$member->displayName = $display_name;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Vidyo_PHP_SDK;
+
 /**
  * Vidyo API for VidyoPortalSuperService
  *
@@ -27,7 +29,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-class VidyoSuperAPI extends VidyoAPI{
+class Vidyo_Super_API extends Vidyo_API{
 
 	/**
 	 * Constructor

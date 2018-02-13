@@ -1,0 +1,145 @@
+2018-02-13 18:37:35 - Time for connecting Vidyo Service: 1.3906311988831 s2018-02-13 18:37:36 - Time for connecting Vidyo Service: 1.2296898365021 s2018-02-13 18:37:37 - Time for connecting Vidyo Service: 1.320787191391 s2018-02-13 18:37:39 - Time for connecting Vidyo Service: 1.2183020114899 s2018-02-13 18:37:40 - Time for connecting Vidyo Service: 1.3371939659119 s2018-02-13 18:37:41 - Time for connecting Vidyo Service: 1.25630402565 s2018-02-13 18:37:42 - Time for connecting Vidyo Service: 1.1945910453796 s2018-02-13 18:37:44 - Time for connecting Vidyo Service: 1.208958864212 s2018-02-13 18:37:45 - Time for connecting Vidyo Service: 1.2202291488647 s2018-02-13 18:38:50 - Time for connecting Vidyo Service: 1.289379119873 s2018-02-13 18:38:52 - Time for connecting Vidyo Service: 1.5894129276276 s2018-02-13 18:38:56 - Time for requesting Vidyo Service (function "createRoom""): 1.1732800006866 s2018-02-13 18:38:59 - Time for connecting Vidyo Service: 1.1580998897552 s2018-02-13 18:39:00 - Time for connecting Vidyo Service: 1.5460159778595 s2018-02-13 18:39:05 - Time for requesting Vidyo Service (function "createRoom""): 1.162201166153 s2018-02-13 18:39:06 - Time for requesting Vidyo Service (function "search""): 1.1691567897797 s2018-02-13 18:39:07 - Time for requesting Vidyo Service (function "search""): 1.1224660873413 s2018-02-13 18:39:08 - Time for requesting Vidyo Service (function "search""): 1.1486229896545 s2018-02-13 18:39:10 - Time for requesting Vidyo Service (function "search""): 1.1435971260071 s2018-02-13 18:39:11 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1448907852173 s2018-02-13 18:39:13 - Time for connecting Vidyo Service: 1.2544589042664 s2018-02-13 18:39:15 - Time for connecting Vidyo Service: 1.4986529350281 s2018-02-13 18:39:19 - Time for requesting Vidyo Service (function "createRoom""): 1.1653110980988 s2018-02-13 18:39:20 - Time for requesting Vidyo Service (function "search""): 1.1403741836548 s2018-02-13 18:39:21 - Time for requesting Vidyo Service (function "search""): 1.1782751083374 s2018-02-13 18:39:23 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1689910888672 s2018-02-13 18:39:24 - Time for connecting Vidyo Service: 1.1383681297302 s2018-02-13 18:39:25 - Time for connecting Vidyo Service: 1.5150711536407 s2018-02-13 18:39:30 - Time for connecting Vidyo Service: 1.2180540561676 s2018-02-13 18:39:31 - Time for connecting Vidyo Service: 1.515429019928 s2018-02-13 18:39:36 - Time for requesting Vidyo Service (function "createRoom""): 1.223512172699 s2018-02-13 18:39:37 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1792478561401 s2018-02-13 18:39:38 - Time for requesting Vidyo Service (function "CreateRoomURL""): 1.1342658996582 s2018-02-13 18:39:40 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1540579795837 s2018-02-13 18:39:41 - Time for requesting Vidyo Service (function "RemoveRoomURL""): 1.1320400238037 s2018-02-13 18:39:41 - stdClass Object
+(
+    [entityID] => 248340
+    [EntityType] => Room
+    [ownerID] => 230613
+    [displayName] => Room 15428052
+    [extension] => 73083113369390
+    [emailAddress] => info@hin.ch
+    [tenant] => Actvisual
+    [Language] => en
+    [MemberStatus] => Offline
+    [MemberMode] => Available
+    [canCallDirect] => 
+    [canJoinMeeting] => 1
+    [canRecordMeeting] => 1
+    [isInMyContacts] => 
+    [RoomStatus] => Empty
+    [RoomMode] => stdClass Object
+        (
+            [roomURL] => https://actvisual.vidyocloud.com/join/syPTcBJ8el
+            [isLocked] => 
+            [hasPIN] => 
+            [roomPIN] => ****
+            [hasModeratorPIN] => 
+            [moderatorPIN] => ****
+        )
+
+    [canControl] => 1
+    [audio] => 
+    [video] => 
+    [appshare] => 1
+)
+2018-02-13 18:39:42 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1621570587158 s2018-02-13 18:39:43 - Time for connecting Vidyo Service: 1.2222800254822 s2018-02-13 18:39:45 - Time for connecting Vidyo Service: 1.5142660140991 s2018-02-13 18:39:49 - Time for requesting Vidyo Service (function "createRoom""): 1.1811618804932 s2018-02-13 18:39:50 - Time for requesting Vidyo Service (function "CreateRoomPIN""): 1.1639759540558 s2018-02-13 18:39:52 - Time for requesting Vidyo Service (function "GetRoom""): 1.1239581108093 s2018-02-13 18:39:53 - Time for requesting Vidyo Service (function "GetRoom""): 1.1520111560822 s2018-02-13 18:39:54 - Time for requesting Vidyo Service (function "RemoveRoomPIN""): 1.1535589694977 s2018-02-13 18:39:55 - Time for requesting Vidyo Service (function "GetRoom""): 1.125284910202 s2018-02-13 18:39:56 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1442620754242 s2018-02-13 18:39:57 - Time for connecting Vidyo Service: 1.2201380729675 s2018-02-13 18:39:59 - Time for connecting Vidyo Service: 1.5124700069427 s2018-02-13 18:40:04 - Time for requesting Vidyo Service (function "createRoom""): 1.1511619091034 s2018-02-13 18:40:05 - Time for requesting Vidyo Service (function "createModeratorPIN""): 1.1476590633392 s2018-02-13 18:40:06 - Time for requesting Vidyo Service (function "removeModeratorPIN""): 1.1689720153809 s2018-02-13 18:40:07 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1589460372925 s2018-02-13 18:40:08 - Time for connecting Vidyo Service: 1.1649160385132 s2018-02-13 18:40:10 - Time for connecting Vidyo Service: 1.4972100257874 s2018-02-13 18:40:14 - Time for requesting Vidyo Service (function "createRoom""): 1.1444580554962 s2018-02-13 18:40:15 - Time for requesting Vidyo Service (function "createModeratorURL""): 1.1687769889832 s2018-02-13 18:40:17 - Time for requesting Vidyo Service (function "getModeratorURL""): 1.1216130256653 s2018-02-13 18:40:18 - Time for requesting Vidyo Service (function "removeModeratorURL""): 1.1260440349579 s2018-02-13 18:40:19 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.164874792099 s2018-02-13 18:40:20 - Time for connecting Vidyo Service: 1.1408100128174 s2018-02-13 18:40:22 - Time for connecting Vidyo Service: 1.4992048740387 s2018-02-13 18:40:26 - Time for requesting Vidyo Service (function "createRoom""): 1.1448731422424 s2018-02-13 18:40:27 - Time for requesting Vidyo Service (function "GetInviteContent""): 1.16663813591 s2018-02-13 18:40:28 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.14564204216 s2018-02-13 18:42:26 - Time for connecting Vidyo Service: 1.3051180839539 s2018-02-13 18:42:27 - Time for connecting Vidyo Service: 1.5073640346527 s2018-02-13 18:42:32 - Time for requesting Vidyo Service (function "createRoom""): 1.1666338443756 s2018-02-13 18:42:34 - Time for connecting Vidyo Service: 1.3192460536957 s2018-02-13 18:42:36 - Time for connecting Vidyo Service: 1.5556540489197 s2018-02-13 18:42:41 - Time for requesting Vidyo Service (function "createRoom""): 1.197389125824 s2018-02-13 18:42:42 - Time for requesting Vidyo Service (function "search""): 1.1443269252777 s2018-02-13 18:42:43 - Time for requesting Vidyo Service (function "search""): 1.189266204834 s2018-02-13 18:42:44 - Time for requesting Vidyo Service (function "search""): 1.1407570838928 s2018-02-13 18:42:45 - Time for requesting Vidyo Service (function "search""): 1.1699171066284 s2018-02-13 18:42:47 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1650190353394 s2018-02-13 18:42:49 - Time for connecting Vidyo Service: 1.150239944458 s2018-02-13 18:42:50 - Time for connecting Vidyo Service: 1.5267310142517 s2018-02-13 18:42:55 - Time for requesting Vidyo Service (function "createRoom""): 1.1658289432526 s2018-02-13 18:42:56 - Time for requesting Vidyo Service (function "search""): 1.1656749248505 s2018-02-13 18:42:57 - Time for requesting Vidyo Service (function "search""): 1.1658480167389 s2018-02-13 18:42:59 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1621899604797 s2018-02-13 18:43:00 - Time for connecting Vidyo Service: 1.1422619819641 s2018-02-13 18:43:01 - Time for connecting Vidyo Service: 1.5015242099762 s2018-02-13 18:43:06 - Time for requesting Vidyo Service (function "AddMember""): 1.1523959636688 s2018-02-13 18:43:07 - Time for requesting Vidyo Service (function "getMembers""): 1.1683940887451 s2018-02-13 18:43:07 - stdClass Object
+(
+    [total] => 1
+    [member] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [memberID] => 70880
+                    [name] => SvenWagener
+                    [displayName] => Sven Wagener
+                    [extension] => 73083111948759
+                    [Language] => en
+                    [RoleName] => Normal
+                    [groupName] => Default
+                    [proxyName] => No Proxy
+                    [emailAddress] => very@awesome.ug
+                    [created] => 2018-02-13+00:00
+                    [allowCallDirect] => 1
+                    [allowPersonalMeeting] => 1
+                )
+
+        )
+
+)
+2018-02-13 18:43:08 - Time for requesting Vidyo Service (function "DeleteMember""): 1.1603660583496 s2018-02-13 18:43:09 - Time for connecting Vidyo Service: 1.2263810634613 s2018-02-13 18:43:11 - Time for connecting Vidyo Service: 1.4891481399536 s2018-02-13 18:43:16 - Time for requesting Vidyo Service (function "createRoom""): 1.2091660499573 s2018-02-13 18:43:17 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.14786195755 s2018-02-13 18:43:18 - Time for requesting Vidyo Service (function "CreateRoomURL""): 1.1744840145111 s2018-02-13 18:43:19 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1275510787964 s2018-02-13 18:43:20 - Time for requesting Vidyo Service (function "RemoveRoomURL""): 1.1344799995422 s2018-02-13 18:43:20 - stdClass Object
+(
+    [entityID] => 248350
+    [EntityType] => Room
+    [ownerID] => 230613
+    [displayName] => Room 24392265
+    [extension] => 73083162424736
+    [emailAddress] => info@hin.ch
+    [tenant] => Actvisual
+    [Language] => en
+    [MemberStatus] => Offline
+    [MemberMode] => Available
+    [canCallDirect] => 
+    [canJoinMeeting] => 1
+    [canRecordMeeting] => 1
+    [isInMyContacts] => 
+    [RoomStatus] => Empty
+    [RoomMode] => stdClass Object
+        (
+            [roomURL] => https://actvisual.vidyocloud.com/join/2UxOZKUPrX
+            [isLocked] => 
+            [hasPIN] => 
+            [roomPIN] => ****
+            [hasModeratorPIN] => 
+            [moderatorPIN] => ****
+        )
+
+    [canControl] => 1
+    [audio] => 
+    [video] => 
+    [appshare] => 1
+)
+2018-02-13 18:43:21 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1709599494934 s2018-02-13 18:43:22 - Time for connecting Vidyo Service: 1.1569559574127 s2018-02-13 18:43:24 - Time for connecting Vidyo Service: 1.5433270931244 s2018-02-13 18:43:29 - Time for requesting Vidyo Service (function "createRoom""): 1.1681110858917 s2018-02-13 18:43:30 - Time for requesting Vidyo Service (function "CreateRoomPIN""): 1.1207339763641 s2018-02-13 18:43:31 - Time for requesting Vidyo Service (function "GetRoom""): 1.1387710571289 s2018-02-13 18:43:32 - Time for requesting Vidyo Service (function "GetRoom""): 1.1293790340424 s2018-02-13 18:43:33 - Time for requesting Vidyo Service (function "RemoveRoomPIN""): 1.1547350883484 s2018-02-13 18:43:34 - Time for requesting Vidyo Service (function "GetRoom""): 1.1262431144714 s2018-02-13 18:43:35 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1995820999146 s2018-02-13 18:43:37 - Time for connecting Vidyo Service: 1.1398320198059 s2018-02-13 18:43:38 - Time for connecting Vidyo Service: 1.5096552371979 s2018-02-13 18:43:43 - Time for requesting Vidyo Service (function "createRoom""): 1.1875410079956 s2018-02-13 18:43:44 - Time for requesting Vidyo Service (function "createModeratorPIN""): 1.1398780345917 s2018-02-13 18:43:45 - Time for requesting Vidyo Service (function "removeModeratorPIN""): 1.1675930023193 s2018-02-13 18:43:46 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1661520004272 s2018-02-13 18:43:48 - Time for connecting Vidyo Service: 1.3591768741608 s2018-02-13 18:43:49 - Time for connecting Vidyo Service: 1.4978799819946 s2018-02-13 18:43:54 - Time for requesting Vidyo Service (function "createRoom""): 1.1816458702087 s2018-02-13 18:43:55 - Time for requesting Vidyo Service (function "createModeratorURL""): 1.1248908042908 s2018-02-13 18:43:56 - Time for requesting Vidyo Service (function "getModeratorURL""): 1.1450669765472 s2018-02-13 18:43:57 - Time for requesting Vidyo Service (function "removeModeratorURL""): 1.1348309516907 s2018-02-13 18:43:58 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1265370845795 s2018-02-13 18:44:00 - Time for connecting Vidyo Service: 1.3366539478302 s2018-02-13 18:44:01 - Time for connecting Vidyo Service: 1.508866071701 s2018-02-13 18:44:06 - Time for requesting Vidyo Service (function "createRoom""): 1.1963078975677 s2018-02-13 18:44:07 - Time for requesting Vidyo Service (function "GetInviteContent""): 1.1686952114105 s2018-02-13 18:44:08 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1638479232788 s2018-02-13 19:54:11 - Time for connecting Vidyo Service: 1.2595059871674 s2018-02-13 19:54:12 - Time for connecting Vidyo Service: 1.5534348487854 s2018-02-13 19:54:17 - Time for requesting Vidyo Service (function "createRoom""): 1.1794831752777 s2018-02-13 19:54:19 - Time for connecting Vidyo Service: 1.1330900192261 s2018-02-13 19:54:21 - Time for connecting Vidyo Service: 1.530357837677 s2018-02-13 19:54:25 - Time for requesting Vidyo Service (function "createRoom""): 1.1403858661652 s2018-02-13 19:54:26 - Time for requesting Vidyo Service (function "search""): 1.1688640117645 s2018-02-13 19:54:28 - Time for requesting Vidyo Service (function "search""): 1.1660950183868 s2018-02-13 19:54:29 - Time for requesting Vidyo Service (function "search""): 1.17338514328 s2018-02-13 19:54:30 - Time for requesting Vidyo Service (function "search""): 1.1912019252777 s2018-02-13 19:54:31 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1288781166077 s2018-02-13 19:54:33 - Time for connecting Vidyo Service: 1.1344769001007 s2018-02-13 19:54:35 - Time for connecting Vidyo Service: 1.5001699924469 s2018-02-13 19:54:40 - Time for requesting Vidyo Service (function "createRoom""): 1.1638350486755 s2018-02-13 19:54:41 - Time for requesting Vidyo Service (function "search""): 1.1686542034149 s2018-02-13 19:54:42 - Time for requesting Vidyo Service (function "search""): 1.1520488262177 s2018-02-13 19:54:43 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1264078617096 s2018-02-13 19:54:44 - Time for connecting Vidyo Service: 1.310319185257 s2018-02-13 19:54:46 - Time for connecting Vidyo Service: 1.5495729446411 s2018-02-13 19:54:51 - Time for requesting Vidyo Service (function "AddMember""): 1.1542141437531 s2018-02-13 19:54:52 - Time for requesting Vidyo Service (function "getMembers""): 1.1578550338745 s2018-02-13 19:54:52 - stdClass Object
+(
+    [total] => 1
+    [member] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [memberID] => 70902
+                    [name] => SvenWagener
+                    [displayName] => Sven Wagener
+                    [extension] => 73083116091016
+                    [Language] => en
+                    [RoleName] => Normal
+                    [groupName] => Default
+                    [proxyName] => No Proxy
+                    [emailAddress] => very@awesome.ug
+                    [created] => 2018-02-13+00:00
+                    [allowCallDirect] => 1
+                    [allowPersonalMeeting] => 1
+                )
+
+        )
+
+)
+2018-02-13 19:54:53 - Time for requesting Vidyo Service (function "DeleteMember""): 1.1297209262848 s2018-02-13 19:54:54 - Time for connecting Vidyo Service: 1.1245498657227 s2018-02-13 19:54:56 - Time for connecting Vidyo Service: 1.5074949264526 s2018-02-13 19:55:00 - Time for requesting Vidyo Service (function "createRoom""): 1.1630439758301 s2018-02-13 19:55:01 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1568500995636 s2018-02-13 19:55:02 - Time for requesting Vidyo Service (function "CreateRoomURL""): 1.1823129653931 s2018-02-13 19:55:04 - Time for requesting Vidyo Service (function "GetEntityByEntityID""): 1.1652739048004 s2018-02-13 19:55:05 - Time for requesting Vidyo Service (function "RemoveRoomURL""): 1.1780090332031 s2018-02-13 19:55:05 - stdClass Object
+(
+    [entityID] => 248438
+    [EntityType] => Room
+    [ownerID] => 230613
+    [displayName] => Room 30061725
+    [extension] => 73083111255834
+    [emailAddress] => info@hin.ch
+    [tenant] => Actvisual
+    [Language] => en
+    [MemberStatus] => Offline
+    [MemberMode] => Available
+    [canCallDirect] => 
+    [canJoinMeeting] => 1
+    [canRecordMeeting] => 1
+    [isInMyContacts] => 
+    [RoomStatus] => Empty
+    [RoomMode] => stdClass Object
+        (
+            [roomURL] => https://actvisual.vidyocloud.com/join/09Vrd4VHYh
+            [isLocked] => 
+            [hasPIN] => 
+            [roomPIN] => ****
+            [hasModeratorPIN] => 
+            [moderatorPIN] => ****
+        )
+
+    [canControl] => 1
+    [audio] => 
+    [video] => 
+    [appshare] => 1
+)
+2018-02-13 19:55:06 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1573748588562 s2018-02-13 19:55:07 - Time for connecting Vidyo Service: 1.1438550949097 s2018-02-13 19:55:09 - Time for connecting Vidyo Service: 1.518326997757 s2018-02-13 19:55:13 - Time for requesting Vidyo Service (function "createRoom""): 1.1725070476532 s2018-02-13 19:55:14 - Time for requesting Vidyo Service (function "CreateRoomPIN""): 1.1324460506439 s2018-02-13 19:55:16 - Time for requesting Vidyo Service (function "GetRoom""): 1.1787190437317 s2018-02-13 19:55:17 - Time for requesting Vidyo Service (function "GetRoom""): 1.1498320102692 s2018-02-13 19:55:18 - Time for requesting Vidyo Service (function "RemoveRoomPIN""): 1.1634380817413 s2018-02-13 19:55:19 - Time for requesting Vidyo Service (function "GetRoom""): 1.1508088111877 s2018-02-13 19:55:20 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1652247905731 s2018-02-13 19:55:21 - Time for connecting Vidyo Service: 1.234925031662 s2018-02-13 19:55:23 - Time for connecting Vidyo Service: 1.5177850723267 s2018-02-13 19:55:28 - Time for requesting Vidyo Service (function "createRoom""): 1.1419250965118 s2018-02-13 19:55:29 - Time for requesting Vidyo Service (function "createModeratorPIN""): 1.1661939620972 s2018-02-13 19:55:30 - Time for requesting Vidyo Service (function "removeModeratorPIN""): 1.1934449672699 s2018-02-13 19:55:31 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.138906955719 s2018-02-13 19:55:32 - Time for connecting Vidyo Service: 1.1355698108673 s2018-02-13 19:55:34 - Time for connecting Vidyo Service: 1.5061388015747 s2018-02-13 19:55:38 - Time for requesting Vidyo Service (function "createRoom""): 1.1536719799042 s2018-02-13 19:55:40 - Time for requesting Vidyo Service (function "createModeratorURL""): 1.1482510566711 s2018-02-13 19:55:41 - Time for requesting Vidyo Service (function "getModeratorURL""): 1.1574759483337 s2018-02-13 19:55:42 - Time for requesting Vidyo Service (function "removeModeratorURL""): 1.1479439735413 s2018-02-13 19:55:43 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1320910453796 s2018-02-13 19:55:44 - Time for connecting Vidyo Service: 1.2220849990845 s2018-02-13 19:55:46 - Time for connecting Vidyo Service: 1.4990019798279 s2018-02-13 19:55:50 - Time for requesting Vidyo Service (function "createRoom""): 1.1614148616791 s2018-02-13 19:55:51 - Time for requesting Vidyo Service (function "GetInviteContent""): 1.1718049049377 s2018-02-13 19:55:53 - Time for requesting Vidyo Service (function "DeleteRoom""): 1.1514990329742 s
