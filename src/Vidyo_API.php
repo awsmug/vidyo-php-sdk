@@ -148,7 +148,7 @@ class Vidyo_API extends \SoapClient
 			$date = date( 'Y-m-d H:i:s', time() );
 			$message = $date . ' - ' . $message . chr( 13 );
 
-			$file = fopen( __CLASS__ . '.log', 'a' );
+			$file = fopen( 'vidyo.log', 'a' );
 			fputs( $file, $message );
 			fclose( $file );
 		}
