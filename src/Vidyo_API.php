@@ -122,7 +122,7 @@ class Vidyo_API extends \SoapClient
 		{
 			$response = $this->$function( $params );
 		}
-		catch ( Exception $e )
+		catch ( \Exception $e )
 		{
 			$this->error( $e->getMessage() );
 
