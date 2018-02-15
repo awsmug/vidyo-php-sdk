@@ -9,8 +9,8 @@ php:
 script:
 - composer update
 - composer dump
-- vendor/bin/phpunit --version
-- vendor/bin/phpunit
+- phpunit --version
+- bin/phpunit
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
