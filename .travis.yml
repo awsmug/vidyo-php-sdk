@@ -10,7 +10,7 @@ script:
 - composer update
 - composer dump
 - phpunit --version
-- bin/phpunit
+- phpunit
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
