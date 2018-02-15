@@ -45,7 +45,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-
 # OS
 .DS_Store
 
@@ -57,4 +56,4 @@ pom.xml.tag
 pom.xml.tag
 vendor
 tests/codeCoverage
-vidyo.log
+vidyo-api.log

@@ -2,8 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-use Vidyo_PHP_SDK\Vidyo_Admin_API;
-use Vidyo_PHP_SDK\Vidyo_User_API;
+use Vidyo_PHP_SDK\Vidyo_Connection;
+use Vidyo_PHP_SDK\Vidyo_Exception;
 
 class VidyoTestCase extends TestCase {
 
@@ -11,40 +11,31 @@ class VidyoTestCase extends TestCase {
 	 * Vidyo API Host
 	 * @var string
 	 */
-	var $vidyo_host;
+	protected $vidyo_host;
 
 	/**
 	 * Vidyo API User
 	 * @var $string
 	 */
-	var $vidyo_user;
+	protected $vidyo_user;
 
 	/**
 	 * Vidyo API Password
 	 * @var string
 	 */
-	var $vidyo_pass;
+	protected $vidyo_pass;
+
+	/**
+	 *
+	 */
+	protected $connection;
 
 	/**
 	 * Vidyo Extension ID
 	 * @var string
 	 */
-	var $vidyo_extension;
+	protected $vidyo_extension;
 
-	/**
-	 * @var VidyoSuperAPI
-	 */
-	var $super_client;
-
-	/**
-	 * @var VidyoAdminAPI
-	 */
-	var $admin_client;
-
-	/**
-	 * @var VidyoUserAPI
-	 */
-	var $user_client;
 
 	/**
 	 * Setting up Objects and variables for tests
@@ -54,10 +45,18 @@ class VidyoTestCase extends TestCase {
 		$this->vidyo_user = getenv( 'VIDYO_USER' );
 		$this->vidyo_pass = getenv( 'VIDYO_PASS' );
 		$this->vidyo_extension = getenv( 'VIDYO_EXTENSION' );
-		$this->vidyo_extension.= $this->get_random_id();
 
-		$this->admin_client = new Vidyo_Admin_API( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
-		$this->user_client = new Vidyo_User_API( $this->vidyo_host, $this->vidyo_user, $this->vidyo_pass, true );
+		$config = array (
+			'host'      => $this->vidyo_host,
+			'username'  => $this->vidyo_user,
+			'password'  => $this->vidyo_pass
+		);
+
+		try {
+			$this->connection = new Vidyo_Connection( $config );
+		} catch ( Vidyo_Exception $e ) {
+			echo $e->getMessage();
+		}
 	}
 
 	/**

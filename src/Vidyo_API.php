@@ -8,35 +8,18 @@ namespace Vidyo_PHP_SDK;
  * API to call vidyo.com Webservices
  *
  * @author  awesome.ug <support@awesome.ug>
- * @package Aspen/Vidyo
+ * @package Vidyo_PHP_SDK
  * @version 1.0.0
  * @since   1.0.0
  * @license GPL 2
- *
- * Copyright 2015 Awesome UG (support@awesome.ug)
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License, version 2, as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
-ini_set( 'soap.wsdl_cache_enabled', '0' );
-
-class Vidyo_API extends \SoapClient
-{
+class Vidyo_API extends \SoapClient {
 	/**
 	 * Endpoint name
 	 *
 	 * @var string
+	 *
+	 * @since 1.0.0
 	 */
 	protected $endpoint;
 
@@ -44,6 +27,8 @@ class Vidyo_API extends \SoapClient
 	 * Version endpoint
 	 *
 	 * @param boolean $debug
+	 *
+	 * @since 1.0.0
 	 */
 	protected $version_endpoint = 'v1_1';
 
@@ -51,6 +36,8 @@ class Vidyo_API extends \SoapClient
 	 * Errors
 	 *
 	 * @var array
+	 *
+	 * @since 1.0.0
 	 */
 	protected $errors = array();
 
@@ -58,52 +45,45 @@ class Vidyo_API extends \SoapClient
 	 * Debug
 	 *
 	 * @param boolean $debug
+	 *
+	 * @since 1.0.0
 	 */
 	protected $debug;
 
 	/**
-	 * Constructor
+	 * Vidyo_API constructor.
 	 *
-	 * @param string $portal_host
+	 * @param Vidyo_Connection $connection
 	 * @param string $endpoint
-	 * @param string $username
-	 * @param string $password
+	 * @param bool $debug
+	 *
+	 * @since 1.0.0
 	 */
-	public function __construct( $portal_host, $endpoint, $username, $password, $debug = FALSE )
-	{
-		$start = microtime( TRUE );
+	public function __construct( Vidyo_Connection $connection, $endpoint, $debug = false ) {
+		ini_set( 'soap.wsdl_cache_enabled', '0' );
+
+		$start       = microtime( true );
 		$this->debug = $debug;
 
 		$this->endpoint = $endpoint;
 
-		$api_url = "https://{$portal_host}/services/{$this->endpoint}?wsdl";
+		$api_url = "https://{$connection->get_host()}/services/{$this->endpoint}?wsdl";
 
 		$options = array(
-			'login'    => $username,
-			'password' => $password,
-			'trace' => 1,
-			'exceptions' => 1,
+			'login'        => $connection->get_username(),
+			'password'     => $connection->get_password(),
+			'trace'        => 1,
+			'exceptions'   => 1,
 			'soap_version' => SOAP_1_2,
-			'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+			'features'     => SOAP_SINGLE_ELEMENT_ARRAYS
 		);
 
-		try
-		{
-			$client = parent::__construct( $api_url, $options );
-		}
-		catch ( Exception $e )
-		{
-			$this->error( $e->getMessage() );
+		parent::__construct( $api_url, $options );
 
-			return FALSE;
-		}
-
-		$time_total =  microtime( TRUE ) - $start;
+		$time_total = microtime( true ) - $start;
 
 		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s';
 		$this->log( $time_log );
-
-		return $client;
 	}
 
 	/**
@@ -112,24 +92,21 @@ class Vidyo_API extends \SoapClient
 	 * @param $function
 	 * @param $params
 	 *
-	 * @return bool
+	 * @return mixed Depends on API
+	 *
+	 * @since 1.0.0
 	 */
-	public function request( $function, $params )
-	{
-		$start =  microtime( TRUE );
+	public function request( $function, $params ) {
+		$start = microtime( true );
 
-		try
-		{
+		try {
 			$response = $this->$function( $params );
-		}
-		catch ( \Exception $e )
-		{
+		} catch ( \Exception $e ) {
 			$this->error( $e->getMessage() );
-
-			return FALSE;
+			return false;
 		}
 
-		$time_total =  microtime( TRUE ) - $start;
+		$time_total = microtime( true ) - $start;
 
 		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s';
 		$this->log( $time_log );
@@ -139,38 +116,50 @@ class Vidyo_API extends \SoapClient
 
 	/**
 	 * SDK Logging function
+	 *
 	 * @param $message
+	 *
+	 * @since 1.0.0
 	 */
-	public function log( $message )
-	{
-		if( TRUE  == $this->debug )
-		{
-			$date = date( 'Y-m-d H:i:s', time() );
-			$message = $date . ' - ' . $message . chr( 13 );
-
-			$file = fopen( 'vidyo.log', 'a' );
-			fputs( $file, $message );
-			fclose( $file );
+	public static function log( $message ) {
+		if( defined( 'VIDYO_LOG_PATH' ) ) {
+			$path = VIDYO_LOG_PATH;
+		} else {
+			$path = __DIR__;
 		}
+
+		if( defined( 'VIDYO_LOG_FILENAME' ) ) {
+			$filename = VIDYO_LOG_FILE;
+		} else {
+			$filename = 'vidyo-api.log';
+		}
+
+		$date    = date( 'Y-m-d H:i:s', time() );
+		$message = $date . ' - ' . $message . chr( 13 );
+
+		$file = fopen( $path . '/' . $filename , 'a' );
+		fputs( $file, $message );
+		fclose( $file );
 	}
 
 	/**
 	 * Adding Notice
 	 *
-	 * @param string $type    Can be error|notice
 	 * @param string $message Notice text
+	 *
+	 * @since 1.0.0
 	 */
-	public function error( $message )
-	{
-		$this->log( 'API Error: ' .  $message );
+	public function error( $message ) {
+		$this->log( 'API Error: ' . $message );
 		$this->errors[] = $message;
 	}
 
 	/**
 	 * Retrieving Notices
+	 *
+	 * @since 1.0.0
 	 */
-	public function get_errors()
-	{
+	public function get_errors() {
 		return $this->errors;
 	}
 }

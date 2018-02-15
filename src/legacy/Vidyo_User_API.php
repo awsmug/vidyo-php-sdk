@@ -8,7 +8,7 @@ namespace Vidyo_PHP_SDK;
  * API to call vidyo.com Webservices
  *
  * @author  awesome.ug <support@awesome.ug>
- * @package Aspen/Vidyo
+ * @package Vidyo_PHP_SDK
  * @version 1.0.0
  * @since   1.0.0
  * @license GPL 2

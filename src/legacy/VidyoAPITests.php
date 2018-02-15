@@ -1,5 +1,7 @@
 <?php
 
+/**
+
 use PHPUnit\Framework\TestCase;
 
 class VidyoAPITests extends VidyoTestCase {
@@ -165,3 +167,5 @@ class VidyoAPITests extends VidyoTestCase {
 		$this->user_client->delete_room( $room->entityID );
 	}
 }
+ *
+ **/
