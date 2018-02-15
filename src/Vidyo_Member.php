@@ -27,6 +27,15 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	private $member_id;
 
 	/**
+	 * Member Properties
+	 *
+	 * @var Vidyo_Member_API_Object
+	 *
+	 * @since 1.0.0
+	 */
+	private $properties;
+
+	/**
 	 * Vidyo_Member constructor.
 	 *
 	 * @param Vidyo_Connection $connection Connection object
@@ -38,6 +47,10 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	public function __construct( Vidyo_Connection $connection, $member_id = null, $debug = false ) {
 		parent::__construct( $connection, $debug );
 		$this->member_id = $member_id;
+
+		if( null !== $this->member_id ) {
+			$this->get_properties();
+		}
 	}
 
 	/**
@@ -75,7 +88,7 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	/**
 	 * Get properties of member
 	 *
-	 * @return \stdClass|bool
+	 * @return bool|Vidyo_Member_API_Object
 	 *
 	 * @since 1.0.0
 	 */
@@ -90,7 +103,10 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 
 		$response = $this->admin_api->request( 'GetMember', $params );
 
-		return $response;
+		$this->properties = new Vidyo_Member_API_Object();
+		$this->properties->set_properties_by_api_object( $response->member );
+
+		return $this->properties;
 	}
 
 	/**
@@ -112,11 +128,11 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 * @since 1.0.0
 	 */
 	private function add( array $properties ) {
-		$member_api_object = new Vidyo_Member_API_Object();
-		$member_api_object->set_properties( $properties );
+		$this->properties = new Vidyo_Member_API_Object();
+		$this->properties->set_properties_by_array( $properties, true );
 
 		$params = array(
-			'member' => $member_api_object
+			'member' => $this->properties
 		);
 
 		$response = $this->admin_api->request( 'AddMember', $params );
@@ -125,7 +141,7 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 		}
 
 		$members = new Vidyo_Members( $this->connection, $this->debug );
-		$response = $members->search( $member_api_object->name );
+		$response = $members->search( $this->properties->name );
 
 		$this->member_id = $response->member[ 0 ]->memberID;
 
@@ -150,17 +166,15 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 *
 	 * @since 1.0.0
 	 */
-	private function update( array $properties ) {
+	public function update( array $properties ) {
 		if( empty( $this->member_id ) ) {
 			return false;
 		}
-
-		$member_api_object = new Vidyo_Member_API_Object();
-		$member_api_object->set_properties( $properties );
+		$this->properties->set_properties_by_array( $properties );
 
 		$params = array(
 			'memberID' => $this->member_id,
-			'member' => $member_api_object
+			'member' => $this->properties
 		);
 
 		$response = $this->admin_api->request( 'UpdateMember', $params );
