@@ -6,9 +6,7 @@ php:
   - 7.2
 
 script:
-- composer update
 - composer dump
-- vendor/bin/phpunit --version
 - vendor/bin/phpunit
 
 install:
