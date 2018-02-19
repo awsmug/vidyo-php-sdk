@@ -43,7 +43,7 @@ class Vidyo_Room_API_Object extends Vidyo_API_Object {
 	/**
 	 * Room Mode
 	 *
-	 * @var string
+	 * @var Vidyo_Room_Mode_API_Object
 	 *
 	 * @since 1.0.0
 	 */
@@ -91,7 +91,14 @@ class Vidyo_Room_API_Object extends Vidyo_API_Object {
 	 *
 	 * We need that because of Vidyo Camel Case and inconsistence we do not want to have on our SDK
 	 *
-	 * @param array $properties
+	 * @param array $properties Room Properties {
+	 *      @type string 'name'
+	 *      @type string 'owner_name'
+	 *      @type string 'extension' Extension number
+	 *      @type string 'room_type' (Optional) Standard is 'Public'
+	 *      @type string 'group_name' (Optional) Standard is 'Default'
+	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional) Standard is 'Public'
+	 * }
 	 * @param bool $use_defaults Using defaults or not
 	 *
 	 * @since 1.0.0

@@ -103,10 +103,15 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	}
 
 	/**
-	 * Add member
+	 * Add room
 	 *
 	 * @param array $properties Room Properties {
-	 *      @type string 'username'
+	 *      @type string 'name'
+	 *      @type string 'owner_name'
+	 *      @type string 'extension' Extension number
+	 *      @type string 'room_type' (Optional) Standard is 'Public'
+	 *      @type string 'group_name' (Optional) Standard is 'Default'
+	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional) Standard is 'Public'
 	 * }
 	 *
 	 * @return int|bool Room ID if added, false if not
