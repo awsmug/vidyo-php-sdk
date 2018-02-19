@@ -50,7 +50,6 @@ class VidyoMemberTests extends VidyoTestCase {
 
 		$this->assertTrue( $response );
 
-
 		$member = new Vidyo_Member( $this->connection, $member_id );
 		$properties = $member->get_properties();
 		$this->assertEquals( $properties->emailAddress, $test_email );

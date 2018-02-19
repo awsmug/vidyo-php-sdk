@@ -39,7 +39,7 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 * Vidyo_Member constructor.
 	 *
 	 * @param Vidyo_Connection $connection Connection object
-	 * @param null|string $member_id Member ID
+	 * @param null|string $member_id Member ID for member to load
 	 * @param bool $debug Turns debug mode and logging on/off
 	 *
 	 * @since 1.0.0
@@ -73,12 +73,12 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 */
 	public function set_properties( array $properties = array() ) {
 		// Add new Member
-		if( null === $this->member_id && count( $properties) > 0 ) {
+		if( null === $this->member_id && count( $properties ) > 0 ) {
 			return $this->add( $properties );
 		}
 
 		// Updating Member
-		if( null === $this->member_id && count( $properties) > 0 ) {
+		if( null === $this->member_id && count( $properties ) > 0 ) {
 			return $this->update( $properties );
 		}
 

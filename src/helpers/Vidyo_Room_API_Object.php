@@ -1,11 +1,10 @@
 <?php
 
 namespace Vidyo_PHP_SDK\Helpers;
-
 use Vidyo_PHP_SDK\Model\Vidyo_API_Object;
 
 /**
- * Class Vidyo_Member_API_Object
+ * Class Vidyo_Public_Room_API_Object
  *
  * Just for not using stdClass
  *
@@ -13,7 +12,7 @@ use Vidyo_PHP_SDK\Model\Vidyo_API_Object;
  *
  * @since 1.0.0
  */
-class Vidyo_Member_API_Object extends Vidyo_API_Object {
+class Vidyo_Room_API_Object extends Vidyo_API_Object {
 	/**
 	 * Name
 	 *
@@ -24,58 +23,41 @@ class Vidyo_Member_API_Object extends Vidyo_API_Object {
 	var $name;
 
 	/**
-	 * Password
+	 * Owner Name
 	 *
 	 * @var string
 	 *
 	 * @since 1.0.0
 	 */
-	var $password;
+	var $ownerName;
 
 	/**
-	 * Displayed name
+	 * Room Type
 	 *
 	 * @var string
 	 *
 	 * @since 1.0.0
 	 */
-	var $displayName;
+	var $RoomType;
 
 	/**
-	 * Email Address
+	 * Room Mode
 	 *
 	 * @var string
 	 *
 	 * @since 1.0.0
 	 */
-	var $emailAddress;
+	var $RoomMode;
+
 
 	/**
 	 * Extension
 	 *
-	 * @var string
+	 * @var int
 	 *
 	 * @since 1.0.0
 	 */
 	var $extension;
-
-	/**
-	 * Language
-	 *
-	 * @var string
-	 *
-	 * @since 1.0.0
-	 */
-	var $Language;
-
-	/**
-	 * Role name
-	 *
-	 * @var string
-	 *
-	 * @since 1.0.0
-	 */
-	var $RoleName;
 
 	/**
 	 * Group name
@@ -94,10 +76,13 @@ class Vidyo_Member_API_Object extends Vidyo_API_Object {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$room_mode = new Vidyo_Room_Mode_API_Object();
+		$room_mode->set_properties_by_array( array(), true );
+
 		$this->defaults = array(
-			'language' => 'en',
-			'role_name' => 'Normal',
-			'group_name' => 'Default'
+			'room_type' => 'Public',
+			'group_name' => 'Default',
+			'room_mode' => $room_mode
 		);
 	}
 
@@ -113,12 +98,10 @@ class Vidyo_Member_API_Object extends Vidyo_API_Object {
 	 */
 	public function set_properties_by_array( array $properties = array(), $use_defaults = false ) {
 		$this->set_property( 'name', 'name', $properties, $use_defaults );
-		$this->set_property( 'emailAddress', 'email', $properties, $use_defaults );
-		$this->set_property( 'password', 'password', $properties, $use_defaults );
-		$this->set_property( 'displayName', 'display_name', $properties, $use_defaults );
+		$this->set_property( 'RoomType', 'room_type', $properties, $use_defaults );
+		$this->set_property( 'ownerName', 'owner_name', $properties, $use_defaults );
 		$this->set_property( 'extension', 'extension', $properties, $use_defaults );
-		$this->set_property( 'Language', 'language', $properties, $use_defaults );
-		$this->set_property( 'RoleName', 'role_name', $properties, $use_defaults );
 		$this->set_property( 'groupName', 'group_name', $properties, $use_defaults );
+		$this->set_property( 'RoomMode', 'room_mode', $properties, $use_defaults );
 	}
 }
