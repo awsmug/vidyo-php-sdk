@@ -255,4 +255,56 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 		return false;
 	}
 
+	/**
+	 * Creating Room PIN
+	 *
+	 * @param string $pin Room PIN
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function create_room_pin( $pin = null ){
+		if( empty( $this->room_id ) ) {
+			return false;
+		}
+
+		$params = array(
+			'roomID' => $this->room_id,
+			'PIN' => $pin
+		);
+
+		$response = $this->admin_api->request( 'CreateRoomPIN', $params );
+
+		if( false !== $response ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Delete Room PIN
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function remove_room_pin(){
+		if( empty( $this->room_id ) ) {
+			return false;
+		}
+
+		$params = array(
+			'roomID' => $this->room_id,
+		);
+
+		$response = $this->admin_api->request( 'RemoveRoomPIN', $params );
+
+		if( false !== $response ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
