@@ -57,7 +57,12 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * Setting properties of member
 	 *
 	 * @param array $properties Room Properties {
-	 *      @type string 'username'
+	 *      @type string 'name'
+	 *      @type string 'owner_name'
+	 *      @type string 'extension' Extension number
+	 *      @type string 'room_type' (Optional) Standard is 'Public'
+	 *      @type string 'group_name' (Optional) Standard is 'Default'
+	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional)
 	 * }
 	 *
 	 * @return bool|int True if updated, false if not. On new room, the ID of the member or false on failure
@@ -111,7 +116,7 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 *      @type string 'extension' Extension number
 	 *      @type string 'room_type' (Optional) Standard is 'Public'
 	 *      @type string 'group_name' (Optional) Standard is 'Default'
-	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional) Standard is 'Public'
+	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional)
 	 * }
 	 *
 	 * @return int|bool Room ID if added, false if not
@@ -143,7 +148,12 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * Update member
 	 *
 	 * @param array $properties Room Properties {
-	 *      @type string 'username'
+	 *      @type string 'name'
+	 *      @type string 'owner_name'
+	 *      @type string 'extension' Extension number
+	 *      @type string 'room_type' (Optional) Standard is 'Public'
+	 *      @type string 'group_name' (Optional) Standard is 'Default'
+	 *      @type \Vidyo_PHP_SDK\Helpers\Vidyo_Room_Mode_API_Object 'room_mode' (Optional)
 	 * }
 	 *
 	 * @return bool True if updated, false if not
