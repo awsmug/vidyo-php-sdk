@@ -205,4 +205,54 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 		return false;
 	}
 
+	/**
+	 * Creating Room URL
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function create_room_url(){
+		if( empty( $this->room_id ) ) {
+			return false;
+		}
+
+		$params = array(
+			'roomID' => $this->room_id
+		);
+
+		$response = $this->admin_api->request( 'CreateRoomURL', $params );
+
+		if( false !== $response ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Remove Room URL
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function remove_room_url(){
+		if( empty( $this->room_id ) ) {
+			return false;
+		}
+
+		$params = array(
+			'roomID' => $this->room_id
+		);
+
+		$response = $this->admin_api->request( 'RemoveRoomURL', $params );
+
+		if( false !== $response ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

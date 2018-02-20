@@ -56,4 +56,14 @@ class VidyoRoomTests extends VidyoTestCase {
 
 		$this->deleteRoom( $room_id );
 	}
+
+	public function testRoomUrl() {
+		$room_id = $this->createRoom();
+
+		$room = new Vidyo_Room( $this->connection, $room_id );
+		$this->assertTrue( $room->create_room_url() );
+		$this->assertTrue( $room->remove_room_url() );
+
+		$this->deleteRoom( $room_id );
+	}
 }
