@@ -62,6 +62,7 @@ class VidyoRoomTests extends VidyoTestCase {
 
 		$room = new Vidyo_Room( $this->connection, $room_id );
 		$this->assertTrue( $room->create_room_url() );
+		$this->assertStringStartsWith( 'http', $room->get_room_url() );
 		$this->assertTrue( $room->remove_room_url() );
 
 		$this->deleteRoom( $room_id );

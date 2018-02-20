@@ -256,6 +256,21 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	}
 
 	/**
+	 * Getting Room URL
+	 *
+	 * @return bool|string
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_room_url() {
+		if( ! property_exists( $this->properties, 'RoomMode' ) || ! property_exists( $this->properties->RoomMode, 'roomURL' )  ) {
+			return false;
+		}
+
+		return $this->properties->RoomMode->roomURL;
+	}
+
+	/**
 	 * Creating Room PIN
 	 *
 	 * @param string $pin Room PIN

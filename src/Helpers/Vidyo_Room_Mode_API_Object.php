@@ -35,6 +35,15 @@ class Vidyo_Room_Mode_API_Object extends Vidyo_API_Object{
 	var $hasPin;
 
 	/**
+	 * Room URL
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	var $roomURL;
+
+	/**
 	 * Vidyo_Room_Mode_API_Object constructor.
 	 *
 	 * Setting up defaults
