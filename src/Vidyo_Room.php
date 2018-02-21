@@ -42,6 +42,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * @param null|string $room_id Room ID for room to load
 	 * @param bool $debug Turns debug mode and logging on/off
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct( Vidyo_Connection $connection, $room_id = null, $debug = false ) {
@@ -67,17 +69,24 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool|int True if updated, false if not. On new room, the ID of the member or false on failure
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function set_properties( array $properties = array() ) {
-		// Add new Room
-		if( null === $this->room_id && count( $properties ) > 0 ) {
-			return $this->add( $properties );
-		}
 
-		// Updating Room
-		if( null === $this->room_id && count( $properties ) > 0 ) {
-			return $this->update( $properties );
+		try {
+			// Add new Room
+			if ( null === $this->room_id && count( $properties ) > 0 ) {
+				return $this->add( $properties );
+			}
+
+			// Updating Room
+			if ( null === $this->room_id && count( $properties ) > 0 ) {
+				return $this->update( $properties );
+			}
+		} catch ( Vidyo_Exception $e ) {
+			throw $e;
 		}
 
 		return false;
@@ -87,6 +96,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * Get properties of member
 	 *
 	 * @return bool|Vidyo_Room_API_Object
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */
@@ -120,6 +131,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * }
 	 *
 	 * @return int|bool Room ID if added, false if not
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */
@@ -158,6 +171,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool True if updated, false if not
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function update( array $properties ) {
@@ -185,6 +200,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool True if user was deleted, false if not.
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function delete() {
@@ -210,6 +227,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function create_room_url(){
@@ -234,6 +253,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * Remove Room URL
 	 *
 	 * @return bool
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */
@@ -276,6 +297,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * @param string $pin Room PIN
 	 * @return bool
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function create_room_pin( $pin = null ){
@@ -301,6 +324,8 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 * Delete Room PIN
 	 *
 	 * @return bool
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */

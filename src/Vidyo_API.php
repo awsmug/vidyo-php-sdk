@@ -94,6 +94,8 @@ class Vidyo_API extends \SoapClient {
 	 *
 	 * @return mixed Depends on API
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function request( $function, $params ) {
@@ -103,7 +105,7 @@ class Vidyo_API extends \SoapClient {
 			$response = $this->$function( $params );
 		} catch ( \Exception $e ) {
 			$this->error( $e->getMessage() );
-			return false;
+			throw new Vidyo_Exception( 'Vidyo Request Error', 0, $e );
 		}
 
 		$time_total = microtime( true ) - $start;

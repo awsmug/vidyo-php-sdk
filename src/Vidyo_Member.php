@@ -42,6 +42,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 * @param null|string $member_id Member ID for member to load
 	 * @param bool $debug Turns debug mode and logging on/off
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct( Vidyo_Connection $connection, $member_id = null, $debug = false ) {
@@ -69,6 +71,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool|int True if updated, false if not. On new member, the ID of the member or false on failure
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function set_properties( array $properties = array() ) {
@@ -90,6 +94,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool|Vidyo_Member_API_Object
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function get_properties() {
@@ -101,7 +107,11 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 			'memberID' => $this->member_id
 		);
 
-		$response = $this->admin_api->request( 'GetMember', $params );
+		try {
+			$response = $this->admin_api->request( 'GetMember', $params );
+		} catch ( Vidyo_Exception $e ) {
+			throw new Vidyo_Exception( 'Could not get properties of member with ID ' . $this->member_id, 0 , $e );
+		}
 
 		$this->properties = new Vidyo_Member_API_Object();
 		$this->properties->set_properties_by_api_object( $response->member );
@@ -125,6 +135,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 *
 	 * @return int|bool Member ID if added, false if not
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	private function add( array $properties ) {
@@ -135,7 +147,12 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 			'member' => $this->properties
 		);
 
-		$response = $this->admin_api->request( 'AddMember', $params );
+		try {
+			$response = $this->admin_api->request( 'AddMember', $params );
+		} catch ( Vidyo_Exception $e ) {
+			throw new Vidyo_Exception( 'Could add member', 0 , $e );
+		}
+
 		if( false === $response ) {
 			return false;
 		}
@@ -164,6 +181,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool True if updated, false if not
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function update( array $properties ) {
@@ -190,6 +209,8 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	 * Delete member
 	 *
 	 * @return bool True if user was deleted, false if not.
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */

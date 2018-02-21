@@ -37,6 +37,8 @@ class Vidyo_Rooms extends Vidyo_Admin_API_Service {
 	 *
 	 * @return bool|\stdClass
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function search( $string ) {
