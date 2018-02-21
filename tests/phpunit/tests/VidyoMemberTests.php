@@ -18,6 +18,7 @@ class VidyoMemberTests extends VidyoTestCase {
 			'email' => $this->test_id . 'unit@test.com',
 			'password' => '123456',
 			'display_name' => 'PHP Unittest ' . $this->test_id,
+			'extension' => $this->vidyo_extension .  $this->test_id
 		);
 	}
 

@@ -16,7 +16,7 @@ use Vidyo_PHP_SDK\Vidyo_API;
  * @since   1.0.0
  * @license GPL 2
  */
-abstract class Vidyo_Admin_API_Service extends Vidyo_API_Service {
+trait Vidyo_Admin_API_Service {
 	/**
 	 * Admin API object
 	 *
@@ -34,8 +34,7 @@ abstract class Vidyo_Admin_API_Service extends Vidyo_API_Service {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( Vidyo_Connection $connection, $debug = false ) {
-		parent::__construct( $connection, $debug );
+	public function init_admin_api( Vidyo_Connection $connection, $debug = false ) {
 		$this->admin_api = new Vidyo_API( $connection, 'VidyoPortalAdminService', $debug );
 	}
 }

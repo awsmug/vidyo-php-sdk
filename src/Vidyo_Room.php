@@ -2,8 +2,10 @@
 
 namespace Vidyo_PHP_SDK;
 
-use Vidyo_PHP_SDK\Helpers\Vidyo_Room_API_Object;
+use Vidyo_PHP_SDK\Model\Vidyo_API_Service;
 use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
+use Vidyo_PHP_SDK\Model\Vidyo_User_API_Service;
+use Vidyo_PHP_SDK\Helpers\Vidyo_Room_API_Object;
 
 /**
  * Vidyo API Room
@@ -16,7 +18,10 @@ use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
  * @since   1.0.0
  * @license GPL 2
  */
-class Vidyo_Room extends Vidyo_Admin_API_Service {
+class Vidyo_Room extends Vidyo_API_Service {
+	use Vidyo_Admin_API_Service;
+	use Vidyo_User_API_Service;
+
 	/**
 	 * Room ID
 	 *
@@ -49,6 +54,9 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	public function __construct( Vidyo_Connection $connection, $room_id = null, $debug = false ) {
 		parent::__construct( $connection, $debug );
 		$this->room_id = $room_id;
+
+		$this->init_admin_api( $connection, $debug );
+		$this->init_user_api( $connection, $debug );
 
 		if( null !== $this->room_id ) {
 			$this->get_properties();
@@ -144,10 +152,7 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 			'room' => $this->properties
 		);
 
-		$response = $this->admin_api->request( 'AddRoom', $params );
-		if( false === $response ) {
-			return false;
-		}
+		$this->admin_api->request( 'AddRoom', $params );
 
 		$rooms = new Vidyo_Rooms( $this->connection, $this->debug );
 		$response = $rooms->search( $this->properties->name );
@@ -177,7 +182,7 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 */
 	public function update( array $properties ) {
 		if( empty( $this->room_id ) ) {
-			return false;
+			throw new Vidyo_Exception( 'No room id given' );
 		}
 		$this->properties->set_properties_by_array( $properties );
 
@@ -186,13 +191,9 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 			'room' => $this->properties
 		);
 
-		$response = $this->admin_api->request( 'UpdateRoom', $params );
+		$this->admin_api->request( 'UpdateRoom', $params );
 
-		if( false !== $response ) {
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -206,7 +207,7 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 */
 	public function delete() {
 		if( empty( $this->room_id ) ) {
-			return false;
+			throw new Vidyo_Exception( 'No room id given' );
 		}
 
 		$params = array(
@@ -233,7 +234,7 @@ class Vidyo_Room extends Vidyo_Admin_API_Service {
 	 */
 	public function create_room_url(){
 		if( empty( $this->room_id ) ) {
-			return false;
+			throw new Vidyo_Exception( 'No room id given' );
 		}
 
 		$params = array(

@@ -4,6 +4,8 @@ namespace Vidyo_PHP_SDK;
 
 use Vidyo_PHP_SDK\Helpers\Vidyo_Member_API_Object;
 use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
+use Vidyo_PHP_SDK\Model\Vidyo_API_Service;
+use Vidyo_PHP_SDK\Model\Vidyo_User_API_Service;
 
 /**
  * Vidyo API Member
@@ -16,7 +18,10 @@ use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
  * @since   1.0.0
  * @license GPL 2
  */
-class Vidyo_Member extends Vidyo_Admin_API_Service {
+class Vidyo_Member extends Vidyo_API_Service {
+	use Vidyo_Admin_API_Service;
+	use Vidyo_User_API_Service;
+
 	/**
 	 * Member ID
 	 *
@@ -49,6 +54,9 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 	public function __construct( Vidyo_Connection $connection, $member_id = null, $debug = false ) {
 		parent::__construct( $connection, $debug );
 		$this->member_id = $member_id;
+
+		$this->init_admin_api( $this->connection, $debug );
+		$this->init_user_api( $this->connection, $debug );
 
 		if( null !== $this->member_id ) {
 			$this->get_properties();
@@ -150,7 +158,7 @@ class Vidyo_Member extends Vidyo_Admin_API_Service {
 		try {
 			$response = $this->admin_api->request( 'AddMember', $params );
 		} catch ( Vidyo_Exception $e ) {
-			throw new Vidyo_Exception( 'Could add member', 0 , $e );
+			throw new Vidyo_Exception( 'Could not add member', 0 , $e );
 		}
 
 		if( false === $response ) {

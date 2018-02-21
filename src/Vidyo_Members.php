@@ -2,7 +2,9 @@
 
 namespace Vidyo_PHP_SDK;
 
+use Vidyo_PHP_SDK\Model\Vidyo_API_Service;
 use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
+use Vidyo_PHP_SDK\Model\Vidyo_User_API_Service;
 
 /**
  * Vidyo API for Members
@@ -15,7 +17,10 @@ use Vidyo_PHP_SDK\Model\Vidyo_Admin_API_Service;
  * @since   1.0.0
  * @license GPL 2
  */
-class Vidyo_Members extends Vidyo_Admin_API_Service {
+class Vidyo_Members extends Vidyo_API_Service {
+	use Vidyo_Admin_API_Service;
+	use Vidyo_User_API_Service;
+
 	/**
 	 * Vidyo_Members constructor.
 	 *
@@ -26,6 +31,9 @@ class Vidyo_Members extends Vidyo_Admin_API_Service {
 	 */
 	public function __construct( Vidyo_Connection $connection, $debug = false ) {
 		parent::__construct( $connection, $debug );
+
+		$this->init_admin_api( $this->connection, $debug );
+		$this->init_user_api( $this->connection, $debug );
 	}
 
 	/**
