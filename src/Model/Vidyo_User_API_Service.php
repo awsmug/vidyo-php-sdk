@@ -35,6 +35,6 @@ trait Vidyo_User_API_Service {
 	 * @since 1.0.0
 	 */
 	public function init_user_api( Vidyo_Connection $connection, $debug = false ) {
-		$this->user_api = new Vidyo_API( $connection, 'VidyoPortalUserService', $debug );
+		$this->user_api = new Vidyo_API( $connection, 'v1_1/VidyoPortalUserService', $debug );
 	}
 }

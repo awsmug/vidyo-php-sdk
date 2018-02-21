@@ -261,7 +261,7 @@ class Vidyo_Room extends Vidyo_API_Service {
 	 */
 	public function remove_room_url(){
 		if( empty( $this->room_id ) ) {
-			return false;
+			throw new Vidyo_Exception( 'No room id given' );
 		}
 
 		$params = array(
@@ -290,6 +290,50 @@ class Vidyo_Room extends Vidyo_API_Service {
 		}
 
 		return $this->properties->RoomMode->roomURL;
+	}
+
+	/**
+	 * Getting a temporary moderator url
+	 *
+	 * @throws Vidyo_Exception
+	 *
+	 * @since 1.0.0
+	 */
+	public function create_moderator_url() {
+		if( empty( $this->room_id ) ) {
+			throw new Vidyo_Exception( 'No room id given' );
+		}
+
+		$params = array(
+			'roomID' => $this->room_id
+		);
+
+		$this->user_api->request( 'createModeratorURL', $params );
+
+		return true;
+	}
+
+	/**
+	 * Getting moderator URL
+	 *
+	 * @return string
+	 *
+	 * @throws Vidyo_Exception
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_moderator_url() {
+		if( empty( $this->room_id ) ) {
+			throw new Vidyo_Exception( 'No room id given' );
+		}
+
+		$params = array(
+			'roomID' => $this->room_id
+		);
+
+		$response = $this->user_api->request( 'getModeratorURL', $params );
+
+		return $response->moderatorURL;
 	}
 
 	/**
