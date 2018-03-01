@@ -81,8 +81,7 @@ class Vidyo_API extends \SoapClient {
 
 		try {
 			parent::__construct( $api_url, $options );
-		}catch ( \SoapFault $e ) {
-		} catch ( \Exception $e ) {
+		} catch ( \SoapFault $e ) {
 			throw new Vidyo_Exception( 'Can´t connect to SOAP Service', 0, $e );
 		}
 
