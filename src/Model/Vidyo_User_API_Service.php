@@ -4,6 +4,7 @@ namespace Vidyo_PHP_SDK\Model;
 
 use Vidyo_PHP_SDK\Vidyo_Connection;
 use Vidyo_PHP_SDK\Vidyo_API;
+use Vidyo_PHP_SDK\Vidyo_Exception;
 
 /**
  * Vidyo User API Service
@@ -31,6 +32,8 @@ trait Vidyo_User_API_Service {
 	 *
 	 * @param Vidyo_Connection $connection Connection object
 	 * @param bool $debug Debug mode
+	 *
+	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */

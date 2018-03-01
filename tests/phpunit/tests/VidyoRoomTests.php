@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use Vidyo_PHP_SDK\Vidyo_Room;
+use Vidyo_PHP_SDK\Vidyo_Connection;
 
 class VidyoRoomTests extends VidyoTestCase {
 	var $test_id;
@@ -29,6 +30,20 @@ class VidyoRoomTests extends VidyoTestCase {
 	public function deleteRoom( $member_id ) {
 		$room = new Vidyo_Room( $this->connection, $member_id );
 		$room->delete();
+	}
+
+	/**
+	 * @expectedException \Vidyo_PHP_SDK\Vidyo_Exception
+	 */
+	public function testConnectionFail() {
+		$conf = array(
+			'host' => 'phantasyhost',
+			'username' => 'phantasyuser',
+			'password' => 'phantasypassword'
+		);
+
+		$connection = new Vidyo_Connection( $conf );
+		$room = new Vidyo_Room( $connection );
 	}
 
 	public function testCreateDeleteRoom() {

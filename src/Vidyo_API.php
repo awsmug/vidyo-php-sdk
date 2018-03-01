@@ -57,6 +57,8 @@ class Vidyo_API extends \SoapClient {
 	 * @param string $endpoint
 	 * @param bool $debug
 	 *
+	 * @throws Vidyo_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct( Vidyo_Connection $connection, $endpoint, $debug = false ) {
@@ -78,7 +80,11 @@ class Vidyo_API extends \SoapClient {
 			'features'     => SOAP_SINGLE_ELEMENT_ARRAYS
 		);
 
-		parent::__construct( $api_url, $options );
+		try {
+			parent::__construct( $api_url, $options );
+		}catch ( \SoapFault $e ) {
+			throw new Vidyo_Exception( 'Can´t connect to SOAP Service', 0, $e );
+		}
 
 		$time_total = microtime( true ) - $start;
 
@@ -103,7 +109,7 @@ class Vidyo_API extends \SoapClient {
 
 		try {
 			$response = $this->$function( $params );
-		} catch ( \Exception $e ) {
+		} catch ( \SoapFault $e ) {
 			$this->error( $e->getMessage() );
 			throw new Vidyo_Exception( 'Vidyo Request Error', 0, $e );
 		}
