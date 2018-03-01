@@ -1,6 +1,7 @@
 <?php
 
 namespace Vidyo_PHP_SDK;
+use SoapFault;
 
 /**
  * Vidyo API
@@ -62,8 +63,6 @@ class Vidyo_API extends \SoapClient {
 	 * @since 1.0.0
 	 */
 	public function __construct( Vidyo_Connection $connection, $endpoint, $debug = false ) {
-		ini_set( 'soap.wsdl_cache_enabled', '0' );
-
 		$start       = microtime( true );
 		$this->debug = $debug;
 
@@ -83,6 +82,7 @@ class Vidyo_API extends \SoapClient {
 		try {
 			parent::__construct( $api_url, $options );
 		}catch ( \SoapFault $e ) {
+		} catch ( \Exception $e ) {
 			throw new Vidyo_Exception( 'Can´t connect to SOAP Service', 0, $e );
 		}
 

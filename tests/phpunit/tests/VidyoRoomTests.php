@@ -43,7 +43,7 @@ class VidyoRoomTests extends VidyoTestCase {
 		);
 
 		$connection = new Vidyo_Connection( $conf );
-		$room = new Vidyo_Room( $connection );
+		new Vidyo_Room( $connection );
 	}
 
 	public function testCreateDeleteRoom() {
