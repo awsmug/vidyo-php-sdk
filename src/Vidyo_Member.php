@@ -57,10 +57,6 @@ class Vidyo_Member extends Vidyo_API_Service {
 
 		$this->init_admin_api( $this->connection, $debug );
 		$this->init_user_api( $this->connection, $debug );
-
-		if( null !== $this->member_id ) {
-			$this->get_properties();
-		}
 	}
 
 	/**

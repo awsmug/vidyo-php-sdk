@@ -57,10 +57,6 @@ class Vidyo_Room extends Vidyo_API_Service {
 
 		$this->init_admin_api( $connection, $debug );
 		$this->init_user_api( $connection, $debug );
-
-		if( null !== $this->room_id ) {
-			$this->get_properties();
-		}
 	}
 
 	/**
