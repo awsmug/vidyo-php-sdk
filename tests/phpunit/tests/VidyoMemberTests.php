@@ -47,6 +47,7 @@ class VidyoMemberTests extends VidyoTestCase {
 		$properties[ 'email' ] = $test_email;
 
 		$member = new Vidyo_Member( $this->connection, $member_id );
+		$member->get_properties();
 		$response = $member->update( $properties );
 
 		$this->assertTrue( $response );
