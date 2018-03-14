@@ -333,6 +333,29 @@ class Vidyo_Room extends Vidyo_API_Service {
 	}
 
 	/**
+	 * Getting moderator URL with token (not needing a password)
+	 *
+	 * @return string
+	 *
+	 * @throws Vidyo_Exception
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_moderator_url_with_token() {
+		if( empty( $this->room_id ) ) {
+			throw new Vidyo_Exception( 'No room id given' );
+		}
+
+		$params = array(
+			'roomID' => $this->room_id
+		);
+
+		$response = $this->user_api->request( 'getModeratorURLWithToken', $params );
+
+		return $response->moderatorURL;
+	}
+
+	/**
 	 * Creating Room PIN
 	 *
 	 * @param string $pin Room PIN

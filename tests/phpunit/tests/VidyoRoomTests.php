@@ -89,8 +89,15 @@ class VidyoRoomTests extends VidyoTestCase {
 		$room_id = $this->createRoom();
 
 		$room = new Vidyo_Room( $this->connection, $room_id );
+		$room->get_properties();
+
 		$this->assertTrue( $room->create_moderator_url() );
-		$this->assertStringStartsWith( 'http', $room->get_moderator_url() );
+
+		$moderator_url = $room->get_moderator_url();
+		$this->assertStringStartsWith( 'http', $moderator_url );
+
+		$moderator_url_token = $room->get_moderator_url_with_token();
+		$this->assertStringStartsWith( 'http', $moderator_url_token );
 
 		$this->deleteRoom( $room_id );
 	}
