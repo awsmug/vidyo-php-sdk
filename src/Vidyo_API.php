@@ -27,45 +27,23 @@ class Vidyo_API extends \SoapClient {
 	/**
 	 * Version endpoint
 	 *
-	 * @param boolean $debug
+	 * @param boolean
 	 *
 	 * @since 1.0.0
 	 */
 	protected $version_endpoint = 'v1_1';
 
 	/**
-	 * Errors
-	 *
-	 * @var array
-	 *
-	 * @since 1.0.0
-	 */
-	protected $errors = array();
-
-	/**
-	 * Debug
-	 *
-	 * @param boolean $debug
-	 *
-	 * @since 1.0.0
-	 */
-	protected $debug;
-
-	/**
 	 * Vidyo_API constructor.
 	 *
 	 * @param Vidyo_Connection $connection
 	 * @param string $endpoint
-	 * @param bool $debug
 	 *
 	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( Vidyo_Connection $connection, $endpoint, $debug = false ) {
-		$start       = microtime( true );
-		$this->debug = $debug;
-
+	public function __construct( Vidyo_Connection $connection, $endpoint ) {
 		$this->endpoint = $endpoint;
 
 		$api_url = "https://{$connection->get_host()}/services/{$this->endpoint}?wsdl";
@@ -84,11 +62,6 @@ class Vidyo_API extends \SoapClient {
 		} catch ( \Exception $e ) {
 			throw new Vidyo_Exception( 'Can´t connect to SOAP Service', 0, $e );
 		}
-
-		$time_total = microtime( true ) - $start;
-
-		$time_log = 'Time for connecting Vidyo Service: ' . $time_total . ' s';
-		$this->log( $time_log );
 	}
 
 	/**
@@ -104,8 +77,6 @@ class Vidyo_API extends \SoapClient {
 	 * @since 1.0.0
 	 */
 	public function request( $function, $params ) {
-		$start = microtime( true );
-
 		try {
 			$response = $this->$function( $params );
 		} catch ( \Exception $e ) {
@@ -113,60 +84,6 @@ class Vidyo_API extends \SoapClient {
 			throw new Vidyo_Exception( 'Vidyo Request Error', 0, $e );
 		}
 
-		$time_total = microtime( true ) - $start;
-
-		$time_log = 'Time for requesting Vidyo Service (function "' . $function . '""): ' . $time_total . ' s';
-		$this->log( $time_log );
-
 		return $response;
-	}
-
-	/**
-	 * SDK Logging function
-	 *
-	 * @param $message
-	 *
-	 * @since 1.0.0
-	 */
-	public static function log( $message ) {
-		if( defined( 'VIDYO_LOG_PATH' ) ) {
-			$path = VIDYO_LOG_PATH;
-		} else {
-			$path = __DIR__;
-		}
-
-		if( defined( 'VIDYO_LOG_FILENAME' ) ) {
-			$filename = VIDYO_LOG_FILE;
-		} else {
-			$filename = 'vidyo-api.log';
-		}
-
-		$date    = date( 'Y-m-d H:i:s', time() );
-		$message = $date . ' - ' . $message . chr( 13 );
-
-		$file = fopen( $path . '/' . $filename , 'a' );
-		fputs( $file, $message );
-		fclose( $file );
-	}
-
-	/**
-	 * Adding Notice
-	 *
-	 * @param string $message Notice text
-	 *
-	 * @since 1.0.0
-	 */
-	public function error( $message ) {
-		$this->log( 'API Error: ' . $message );
-		$this->errors[] = $message;
-	}
-
-	/**
-	 * Retrieving Notices
-	 *
-	 * @since 1.0.0
-	 */
-	public function get_errors() {
-		return $this->errors;
 	}
 }
