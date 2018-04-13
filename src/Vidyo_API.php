@@ -38,12 +38,13 @@ class Vidyo_API extends \SoapClient {
 	 *
 	 * @param Vidyo_Connection $connection
 	 * @param string $endpoint
+	 * @param array $extra_options
 	 *
 	 * @throws Vidyo_Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( Vidyo_Connection $connection, $endpoint ) {
+	public function __construct( Vidyo_Connection $connection, $endpoint, $extra_options = array() ) {
 		$this->endpoint = $endpoint;
 
 		$api_url = "https://{$connection->get_host()}/services/{$this->endpoint}?wsdl";
@@ -56,6 +57,8 @@ class Vidyo_API extends \SoapClient {
 			'soap_version' => SOAP_1_2,
 			'features'     => SOAP_SINGLE_ELEMENT_ARRAYS
 		);
+
+		$options = array_merge( $options, $extra_options );
 
 		try {
 			parent::__construct( $api_url, $options );
