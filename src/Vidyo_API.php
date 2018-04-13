@@ -83,7 +83,6 @@ class Vidyo_API extends \SoapClient {
 		try {
 			$response = $this->$function( $params );
 		} catch ( \Exception $e ) {
-			$this->error( $e->getMessage() );
 			throw new Vidyo_Exception( 'Vidyo Request Error', 0, $e );
 		}
 
