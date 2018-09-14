@@ -91,7 +91,7 @@ class Vidyo_Member_API_Object extends Vidyo_API_Object {
 	 *
 	 * @var string
 	 *
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 */
 	var $locationTag = 'Default';
 

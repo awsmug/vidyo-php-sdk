@@ -1,9 +1,9 @@
 {
   "name": "vidyo-php-sdk",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Vidyo PHP SDK for programming with Vidyo video API.",
   "keywords": [
-    "vidyo"
+    "vidyo"c
   ],
   "author": {
     "name": "Awesome UG",
