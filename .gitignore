@@ -53,7 +53,7 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
-pom.xml.tag
 vendor
 tests/codeCoverage
 vidyo-api.log
+composer.lock
