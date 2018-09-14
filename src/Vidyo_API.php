@@ -47,7 +47,7 @@ class Vidyo_API extends \SoapClient {
 	public function __construct( Vidyo_Connection $connection, $endpoint ) {
 		$this->endpoint = $endpoint;
 
-		$api_url = "https://{$connection->get_host()}/services/{$this->endpoint}?wsdl";
+		$api_url = "https://{$connection->get_host()}/services/{$this->version_endpoint}/{$this->endpoint}?wsdl";
 
 		$options = array(
 			'login'        => $connection->get_username(),
