@@ -57,3 +57,4 @@ vendor
 tests/codeCoverage
 vidyo-api.log
 composer.lock
+php_errors.log
