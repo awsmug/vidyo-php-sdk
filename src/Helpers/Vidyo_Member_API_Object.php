@@ -87,6 +87,15 @@ class Vidyo_Member_API_Object extends Vidyo_API_Object {
 	var $groupName;
 
 	/**
+	 * Location tag
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	var $locationTag = 'Default';
+
+	/**
 	 * Vidyo_Member_API_Object constructor.
 	 *
 	 * Setting up defaults
