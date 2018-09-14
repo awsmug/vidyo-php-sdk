@@ -23,7 +23,7 @@
     "preferred-install": "dist"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.5",
+    "phpunit/phpunit": "^7.3.5",
     "codeclimate/php-test-reporter": "^0.4.4"
   },
   "autoload": {
