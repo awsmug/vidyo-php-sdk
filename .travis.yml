@@ -7,7 +7,7 @@ php:
 
 script:
 - composer dump
-- vendor/bin/phpunit
+- phpunit
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
